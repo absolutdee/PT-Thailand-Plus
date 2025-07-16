@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>แจ้งเตือนการเทรนพรุ่งนี้</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            background-color: #f8f9fa;
+        }
+        
+        .email-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .header {
+            background-color: #df2528;
+            padding: 30px 20px;
+            text-align: center;
+            color: white;
+        }
+        
+        .header h1 {
+            font-size: 28px;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+        
+        .header .logo {
+            font-size: 40px;
+            margin-bottom: 15px;
+        }
+        
+        .content {
+            padding: 40px 30px;
+        }
+        
+        .reminder-icon {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .reminder-icon i {
+            font-size: 60px;
+            color: #df2528;
+            background-color: #fff2f2;
+            padding: 20px;
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+        
+        h2 {
+            color: #232956;
+            font-size: 24px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .countdown {
+            background-color: #df2528;
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            margin: 25px 0;
+        }
+        
+        .countdown h3 {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+        
+        .countdown .time {
+            font-size: 32px;
+            font-weight: 700;
+            margin: 10px 0;
+        }
+        
+        .countdown p {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+        
+        .session-details {
+            background-color: #f8f9fa;
+            border-radius: 10px;
+            padding: 25px;
+            margin: 30px 0;
+            border-left: 4px solid #df2528;
+        }
+        
+        .detail-row {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            padding: 8px 0;
+        }
+        
+        .detail-row:last-child {
+            margin-bottom: 0;
+        }
+        
+        .detail-icon {
+            font-size: 18px;
+            color: #df2528;
+            margin-right: 15px;
+            width: 25px;
+        }
+        
+        .detail-label {
+            font-weight: 600;
+            color: #232956;
+            min-width: 100px;
+        }
+        
+        .detail-value {
+            color: #333;
+            flex: 1;
+        }
+        
+        .trainer-quick-info {
+            background-color: #232956;
+            color: white;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 25px 0;
+            display: flex;
+            align-items: center;
+        }
+        
+        .trainer-avatar {
+            width: 60px;
+            height: 60px;
+            background-color: #df2528;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            color: white;
+            font-size: 24px;
+        }
+        
+        .trainer-info h4 {
+            margin-bottom: 5px;
+            font-size: 16px;
+        }
+        
+        .trainer-info p {
+            opacity: 0.8;
+            font-size: 14px;
+            margin: 0;
+        }
+        
+        .preparation-tips {
+            background-color: #e8f5e8;
+            border: 2px solid #28a745;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 25px 0;
+        }
+        
+        .preparation-tips h4 {
+            color: #28a745;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .preparation-tips h4 i {
+            margin-right: 10px;
+        }
+        
+        .tip-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 10px;
+            color: #155724;
+        }
+        
+        .tip-item i {
+            color: #28a745;
+            margin-right: 10px;
+            margin-top: 2px;
+        }
+        
+        .action-buttons {
+            display: flex;
+            gap: 15px;
+            margin: 30px 0;
+        }
+        
+        .btn {
+            flex: 1;
+            padding: 15px 20px;
+            text-decoration: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            text-align: center;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .btn i {
+            margin-right: 8px;
+        }
+        
+        .btn-primary {
+            background-color: #df2528;
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background-color: #c21e21;
+        }
+        
+        .btn-outline {
+            background-color: transparent;
+            color: #232956;
+            border: 2px solid #232956;
+        }
+        
+        .btn-outline:hover {
+            background-color: #232956;
+            color: white;
+        }
+        
+        .weather-info {
+            background-color: #e3f2fd;
+            border: 1px solid #2196f3;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 20px 0;
+            text-align: center;
+        }
+        
+        .weather-info h5 {
+            color: #1976d2;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .weather-info h5 i {
+            margin-right: 8px;
+        }
+        
+        .weather-info p {
+            color: #1976d2;
+            margin: 0;
+            font-size: 14px;
+        }
+        
+        .contact-trainer {
+            background-color: #fff;
+            border: 2px solid #f8f9fa;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 25px 0;
+            text-align: center;
+        }
+        
+        .contact-trainer h5 {
+            color: #232956;
+            margin-bottom: 15px;
+        }
+        
+        .footer {
+            background-color: #232956;
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        .footer-links {
+            margin-bottom: 20px;
+        }
+        
+        .footer-links a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+            font-size: 14px;
+        }
+        
+        .social-links {
+            margin: 20px 0;
+        }
+        
+        .social-links a {
+            color: white;
+            font-size: 20px;
+            margin: 0 10px;
+            text-decoration: none;
+        }
+        
+        .copyright {
+            font-size: 12px;
+            color: #ccc;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="email-container">
+        <!-- Header -->
+        <div class="header">
+            <div class="logo">
+                <i class="bi bi-alarm"></i>
+            </div>
+            <h1>FitTrainer</h1>
+            <p>แจ้งเตือนการเทรนพรุ่งนี้</p>
+        </div>
+        
+        <!-- Content -->
+        <div class="content">
+            <div class="reminder-icon">
+                <i class="bi bi-bell"></i>
+            </div>
+            
+            <h2>เตรียมตัวสำหรับการเทรนพรุ่งนี้!</h2>
+            
+            <div class="countdown">
+                <h3>เหลือเวลาอีก</h3>
+                <div class="time">18 ชั่วโมง 45 นาที</div>
+                <p>ถึงเวลานัดเทรนของคุณ</p>
+            </div>
+            
+            <!-- Session Details -->
+            <div class="session-details">
+                <div class="detail-row">
+                    <i class="bi bi-calendar3 detail-icon"></i>
+                    <span class="detail-label">วันที่:</span>
+                    <span class="detail-value">วันจันทร์ที่ 20 มกราคม 2025</span>
+                </div>
+                <div class="detail-row">
+                    <i class="bi bi-clock detail-icon"></i>
+                    <span class="detail-label">เวลา:</span>
+                    <span class="detail-value">09:00 - 10:30 น.</span>
+                </div>
+                <div class="detail-row">
+                    <i class="bi bi-geo-alt detail-icon"></i>
+                    <span class="detail-label">สถานที่:</span>
+                    <span class="detail-value">Fitness First พระราม 4</span>
+                </div>
+                <div class="detail-row">
+                    <i class="bi bi-activity detail-icon"></i>
+                    <span class="detail-label">ประเภท:</span>
+                    <span class="detail-value">Personal Training</span>
+                </div>
+            </div>
+            
+            <!-- Trainer Info -->
+            <div class="trainer-quick-info">
+                <div class="trainer-avatar">
+                    <i class="bi bi-person"></i>
+                </div>
+                <div class="trainer-info">
+                    <h4>อาจารย์สมชาย ใจดี</h4>
+                    <p>เทรนเนอร์ประจำของคุณ</p>
+                </div>
+            </div>
+            
+            <!-- Weather Info -->
+            <div class="weather-info">
+                <h5><i class="bi bi-sun"></i> สภาพอากาศพรุ่งนี้</h5>
+                <p>แจ่มใส 28°C - เหมาะสำหรับการออกกำลังกาย</p>
+            </div>
+            
+            <!-- Preparation Tips -->
+            <div class="preparation-tips">
+                <h4><i class="bi bi-list-check"></i> เตรียมความพร้อม</h4>
+                <div class="tip-item">
+                    <i class="bi bi-check-circle"></i>
+                    <span>นำขวดน้ำและผ้าเช็ดหน้ามาด้วย</span>
+                </div>
+                <div class="tip-item">
+                    <i class="bi bi-check-circle"></i>
+                    <span>แต่งกายชุดออกกำลังกายที่สะดวกต่อการเคลื่อนไหว</span>
+                </div>
+                <div class="tip-item">
+                    <i class="bi bi-check-circle"></i>
+                    <span>มาถึงก่อนเวลานัด 10 นาที</span>
+                </div>
+                <div class="tip-item">
+                    <i class="bi bi-check-circle"></i>
+                    <span>รับประทานอาหารเบาๆ ก่อนการเทรน 1-2 ชั่วโมง</span>
+                </div>
+                <div class="tip-item">
+                    <i class="bi bi-check-circle"></i>
+                    <span>หลีกเลี่ยงการรับประทานอาหารหนักก่อนออกกำลังกาย</span>
+                </div>
+            </div>
+            
+            <!-- Action Buttons -->
+            <div class="action-buttons">
+                <a href="#" class="btn btn-primary">
+                    <i class="bi bi-geo-alt"></i> ดูแผนที่
+                </a>
+                <a href="#" class="btn btn-outline">
+                    <i class="bi bi-calendar-x"></i> เลื่อนนัด
+                </a>
+            </div>
+            
+            <!-- Contact Trainer -->
+            <div class="contact-trainer">
+                <h5>มีคำถามเพิ่มเติม?</h5>
+                <p style="color: #666; margin-bottom: 15px;">สามารถแชทกับเทรนเนอร์ได้ตลอดเวลา</p>
+                <a href="#" class="btn btn-primary" style="width: auto; display: inline-flex;">
+                    <i class="bi bi-chat-dots"></i> แชทกับเทรนเนอร์
+                </a>
+            </div>
+            
+            <div style="text-align: center; color: #666; margin-top: 30px; font-size: 14px;">
+                <i class="bi bi-info-circle"></i> 
+                คุณจะได้รับการแจ้งเตือนอีกครั้งก่อนเวลานัด 2 ชั่วโมง
+            </div>
+        </div>
+        
+        <!-- Footer -->
+        <div class="footer">
+            <div class="footer-links">
+                <a href="#">ดูการจองทั้งหมด</a>
+                <a href="#">ติดต่อเรา</a>
+                <a href="#">ช่วยเหลือ</a>
+                <a href="#">ตั้งค่าการแจ้งเตือน</a>
+            </div>
+            
+            <div class="social-links">
+                <a href="#"><i class="bi bi-facebook"></i></a>
+                <a href="#"><i class="bi bi-instagram"></i></a>
+                <a href="#"><i class="bi bi-line"></i></a>
+                <a href="#"><i class="bi bi-youtube"></i></a>
+            </div>
+            
+            <div class="copyright">
+                © 2025 FitTrainer. สงวนลิขสิทธิ์
+            </div>
+        </div>
+    </div>
+</body>
+</html>

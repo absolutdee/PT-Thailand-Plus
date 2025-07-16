@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>รีวิวประสบการณ์การเทรนของคุณ</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            background-color: #f8f9fa;
+        }
+        
+        .email-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .header {
+            background-color: #232956;
+            padding: 30px 20px;
+            text-align: center;
+            color: white;
+        }
+        
+        .header h1 {
+            font-size: 28px;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+        
+        .header .logo {
+            font-size: 40px;
+            margin-bottom: 15px;
+        }
+        
+        .content {
+            padding: 40px 30px;
+        }
+        
+        .review-icon {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .review-icon i {
+            font-size: 60px;
+            color: #df2528;
+            background-color: #fff2f2;
+            padding: 20px;
+            border-radius: 50%;
+        }
+        
+        h2 {
+            color: #232956;
+            font-size: 24px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .greeting {
+            font-size: 16px;
+            color: #333;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+        
+        .description {
+            color: #666;
+            font-size: 16px;
+            margin-bottom: 30px;
+            line-height: 1.8;
+            text-align: center;
+        }
+        
+        .trainer-summary {
+            background-color: #f8f9fa;
+            border-radius: 10px;
+            padding: 25px;
+            margin: 30px 0;
+            border-left: 4px solid #df2528;
+        }
+        
+        .trainer-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .trainer-avatar {
+            width: 80px;
+            height: 80px;
+            background-color: #df2528;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 20px;
+            color: white;
+            font-size: 30px;
+        }
+        
+        .trainer-info h4 {
+            color: #232956;
+            margin-bottom: 8px;
+            font-size: 20px;
+        }
+        
+        .trainer-info p {
+            color: #666;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+        
+        .current-rating {
+            display: flex;
+            align-items: center;
+        }
+        
+        .current-rating i {
+            color: #ffc107;
+            margin-right: 3px;
+        }
+        
+        .current-rating span {
+            color: #666;
+            margin-left: 8px;
+            font-size: 14px;
+        }
+        
+        .session-summary {
+            background-color: #fff;
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 25px 0;
+        }
+        
+        .session-summary h5 {
+            color: #232956;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .session-summary h5 i {
+            margin-right: 10px;
+            color: #df2528;
+        }
+        
+        .session-stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-top: 15px;
+        }
+        
+        .stat-item {
+            text-align: center;
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+        }
+        
+        .stat-number {
+            font-size: 28px;
+            font-weight: bold;
+            color: #df2528;
+            display: block;
+        }
+        
+        .stat-label {
+            font-size: 14px;
+            color: #666;
+            margin-top: 5px;
+        }
+        
+        .rating-section {
+            background-color: #fff3cd;
+            border: 2px solid #ffc107;
+            border-radius: 10px;
+            padding: 25px;
+            margin: 25px 0;
+            text-align: center;
+        }
+        
+        .rating-section h4 {
+            color: #856404;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .rating-section h4 i {
+            margin-right: 10px;
+        }
+        
+        .star-rating {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin: 20px 0;
+        }
+        
+        .star {
+            font-size: 30px;
+            color: #ddd;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+        
+        .star:hover,
+        .star.active {
+            color: #ffc107;
+        }
+        
+        .rating-labels {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+            font-size: 12px;
+            color: #666;
+        }
+        
+        .quick-review-options {
+            margin: 20px 0;
+        }
+        
+        .review-option {
+            background-color: #f8f9fa;
+            border: 2px solid transparent;
+            border-radius: 8px;
+            padding: 12px 15px;
+            margin: 8px 0;
+            cursor: pointer;
+            transition: all 0.3s;
+            color: #333;
+            font-size: 14px;
+        }
+        
+        .review-option:hover {
+            border-color: #df2528;
+            background-color: #fff2f2;
+        }
+        
+        .review-option i {
+            color: #df2528;
+            margin-right: 10px;
+        }
+        
+        .review-buttons {
+            display: flex;
+            gap: 15px;
+            margin: 30px 0;
+        }
+        
+        .btn {
+            flex: 1;
+            padding: 15px 20px;
+            text-decoration: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            text-align: center;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .btn i {
+            margin-right: 8px;
+        }
+        
+        .btn-primary {
+            background-color: #df2528;
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background-color: #c21e21;
+        }
+        
+        .btn-outline {
+            background-color: transparent;
+            color: #232956;
+            border: 2px solid #232956;
+        }
+        
+        .btn-outline:hover {
+            background-color: #232956;
+            color: white;
+        }
+        
+        .benefits {
+            background-color: #e8f5e8;
+            border: 2px solid #28a745;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 25px 0;
+        }
+        
+        .benefits h5 {
+            color: #28a745;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .benefits h5 i {
+            margin-right: 10px;
+        }
+        
+        .benefit-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 10px;
+            color: #155724;
+        }
+        
+        .benefit-item:last-child {
+            margin-bottom: 0;
+        }
+        
+        .benefit-item i {
+            color: #28a745;
+            margin-right: 10px;
+            margin-top: 2px;
+        }
+        
+        .testimonial {
+            background-color: #f8f9fa;
+            border-left: 4px solid #6c757d;
+            padding: 20px;
+            margin: 25px 0;
+            font-style: italic;
+        }
+        
+        .testimonial-text {
+            color: #333;
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+        
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            color: #666;
+            font-size: 14px;
+        }
+        
+        .testimonial-author i {
+            margin-right: 8px;
+            color: #6c757d;
+        }
+        
+        .skip-option {
+            text-align: center;
+            margin: 25px 0;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+        }
+        
+        .skip-option p {
+            color: #666;
+            margin-bottom: 10px;
+            font-size: 14px;
+        }
+        
+        .skip-option a {
+            color: #6c757d;
+            text-decoration: none;
+            font-size: 14px;
+        }
+        
+        .skip-option a:hover {
+            text-decoration: underline;
+        }
+        
+        .footer {
+            background-color: #232956;
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        .footer-links {
+            margin-bottom: 20px;
+        }
+        
+        .footer-links a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+            font-size: 14px;
+        }
+        
+        .social-links {
+            margin: 20px 0;
+        }
+        
+        .social-links a {
+            color: white;
+            font-size: 20px;
+            margin: 0 10px;
+            text-decoration: none;
+        }
+        
+        .copyright {
+            font-size: 12px;
+            color: #ccc;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="email-container">
+        <!-- Header -->
+        <div class="header">
+            <div class="logo">
+                <i class="bi bi-star"></i>
+            </div>
+            <h1>FitTrainer</h1>
+            <p>รีวิวประสบการณ์การเทรน</p>
+        </div>
+        
+        <!-- Content -->
+        <div class="content">
+            <div class="review-icon">
+                <i class="bi bi-chat-heart"></i>
+            </div>
+            
+            <h2>แบ่งปันประสบการณ์การเทรนของคุณ</h2>
+            
+            <div class="greeting">
+                สวัสดีครับ/ค่ะ [ชื่อลูกค้า]
+            </div>
+            
+            <div class="description">
+                ขอบคุณที่ใช้บริการ FitTrainer เราหวังว่าคุณจะมีประสบการณ์ที่ดีกับการเทรนครั้งนี้ 
+                ความคิดเห็นของคุณมีค่ามากสำหรับเราและจะช่วยให้เทรนเนอร์คนอื่นๆ ได้รับการพัฒนา
+            </div>
+            
+            <!-- Trainer Summary -->
+            <div class="trainer-summary">
+                <div class="trainer-header">
+                    <div class="trainer-avatar">
+                        <i class="bi bi-person"></i>
+                    </div>
+                    <div class="trainer-info">
+                        <h4>อาจารย์สมชาย ใจดี</h4>
+                        <p><i class="bi bi-award"></i> เทรนเนอร์มืออาชีพ 5 ปี</p>
+                        <p><i class="bi bi-mortarboard"></i> ประกาศนียบัตรฟิตเนส ACE</p>
+                        <div class="current-rating">
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <span>4.9 (126 รีวิว)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Session Summary -->
+            <div class="session-summary">
+                <h5><i class="bi bi-graph-up"></i> สรุปการเทรนของคุณ</h5>
+                <p style="color: #666; margin-bottom: 15px;">แพคเกจ: Personal Training Premium (8 เซสชัน)</p>
+                
+                <div class="session-stats">
+                    <div class="stat-item">
+                        <span class="stat-number">8</span>
+                        <div class="stat-label">เซสชันที่เสร็จสิ้น</div>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">12</span>
+                        <div class="stat-label">ชั่วโมงการเทรน</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Rating Section -->
+            <div class="rating-section">
+                <h4><i class="bi bi-star"></i> คุณประทับใจการเทรนมากแค่ไหน?</h4>
+                
+                <div class="star-rating">
+                    <i class="bi bi-star star" data-rating="1"></i>
+                    <i class="bi bi-star star" data-rating="2"></i>
+                    <i class="bi bi-star star" data-rating="3"></i>
+                    <i class="bi bi-star star" data-rating="4"></i>
+                    <i class="bi bi-star star" data-rating="5"></i>
+                </div>
+                
+                <div class="rating-labels">
+                    <span>ไม่พอใจ</span>
+                    <span>ปานกลาง</span>
+                    <span>ประทับใจมาก</span>
+                </div>
+                
+                <div class="quick-review-options">
+                    <div class="review-option">
+                        <i class="bi bi-heart"></i>
+                        เทรนเนอร์ใส่ใจและเป็นมิตร
+                    </div>
+                    <div class="review-option">
+                        <i class="bi bi-trophy"></i>
+                        ได้ผลลัพธ์ตามที่คาดหวัง
+                    </div>
+                    <div class="review-option">
+                        <i class="bi bi-clock"></i>
+                        ตรงต่อเวลาและมีความน่าเชื่อถือ
+                    </div>
+                    <div class="review-option">
+                        <i class="bi bi-mortarboard"></i>
+                        มีความรู้และประสบการณ์สูง
+                    </div>
+                    <div class="review-option">
+                        <i class="bi bi-chat-dots"></i>
+                        สื่อสารได้ดีและให้คำแนะนำที่เป็นประโยชน์
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Review Buttons -->
+            <div class="review-buttons">
+                <a href="#" class="btn btn-primary">
+                    <i class="bi bi-pencil"></i> เขียนรีวิว
+                </a>
+                <a href="#" class="btn btn-outline">
+                    <i class="bi bi-star"></i> ให้คะแนนเฉยๆ
+                </a>
+            </div>
+            
+            <!-- Benefits -->
+            <div class="benefits">
+                <h5><i class="bi bi-gift"></i> ประโยชน์จากการรีวิว</h5>
+                <div class="benefit-item">
+                    <i class="bi bi-check-circle"></i>
+                    <span>ช่วยให้ลูกค้าคนอื่นเลือกเทรนเนอร์ได้เหมาะสม</span>
+                </div>
+                <div class="benefit-item">
+                    <i class="bi bi-check-circle"></i>
+                    <span>สนับสนุนเทรนเนอร์ที่ดีให้ได้รับการยอมรับ</span>
+                </div>
+                <div class="benefit-item">
+                    <i class="bi bi-check-circle"></i>
+                    <span>ช่วยพัฒนาคุณภาพการบริการของ FitTrainer</span>
+                </div>
+                <div class="benefit-item">
+                    <i class="bi bi-check-circle"></i>
+                    <span>รับคูปองส่วนลด 10% สำหรับการจองครั้งต่อไป!</span>
+                </div>
+            </div>
+            
+            <!-- Testimonial -->
+            <div class="testimonial">
+                <div class="testimonial-text">
+                    "การรีวิวช่วยให้ผมพบเทรนเนอร์ที่เหมาะสมกับตัวเอง ขอบคุณสำหรับ
+                    ความคิดเห็นที่จริงใจของทุกคน มันช่วยให้การตัดสินใจง่ายขึ้นมาก"
+                </div>
+                <div class="testimonial-author">
+                    <i class="bi bi-person-circle"></i>
+                    คุณวิทยา - ลูกค้า FitTrainer
+                </div>
+            </div>
+            
+            <!-- Skip Option -->
+            <div class="skip-option">
+                <p>ไม่สะดวกรีวิวในตอนนี้?</p>
+                <a href="#">แจ้งให้เราทราบในภายหลัง</a>
+            </div>
+            
+            <div style="text-align: center; color: #666; margin-top: 30px; font-size: 14px;">
+                <i class="bi bi-info-circle"></i> 
+                การรีวิวนี้จะถูกเผยแพร่หลังจากการตรวจสอบเพื่อให้แน่ใจว่าเป็นความคิดเห็นที่สร้างสรรค์
+            </div>
+        </div>
+        
+        <!-- Footer -->
+        <div class="footer">
+            <div class="footer-links">
+                <a href="#">ดูประวัติการเทรน</a>
+                <a href="#">หาเทรนเนอร์ใหม่</a>
+                <a href="#">ช่วยเหลือ</a>
+                <a href="#">นโยบายรีวิว</a>
+            </div>
+            
+            <div class="social-links">
+                <a href="#"><i class="bi bi-facebook"></i></a>
+                <a href="#"><i class="bi bi-instagram"></i></a>
+                <a href="#"><i class="bi bi-line"></i></a>
+                <a href="#"><i class="bi bi-youtube"></i></a>
+            </div>
+            
+            <div class="copyright">
+                © 2025 FitTrainer. สงวนลิขสิทธิ์
+            </div>
+        </div>
+    </div>
+</body>
+</html>

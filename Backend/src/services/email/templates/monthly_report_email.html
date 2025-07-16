@@ -1,0 +1,935 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>รายงานความก้าวหน้าประจำเดือน มกราคม 2025</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            background-color: #f8f9fa;
+        }
+        
+        .email-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .header {
+            background-color: #232956;
+            padding: 30px 20px;
+            text-align: center;
+            color: white;
+            position: relative;
+        }
+        
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, #232956 0%, #df2528 100%);
+            opacity: 0.1;
+        }
+        
+        .header h1 {
+            font-size: 28px;
+            font-weight: 600;
+            margin-bottom: 10px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .header .logo {
+            font-size: 40px;
+            margin-bottom: 15px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .header .period {
+            font-size: 16px;
+            opacity: 0.9;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .content {
+            padding: 40px 30px;
+        }
+        
+        .report-icon {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .report-icon i {
+            font-size: 60px;
+            color: #df2528;
+            background-color: #fff2f2;
+            padding: 20px;
+            border-radius: 50%;
+        }
+        
+        h2 {
+            color: #232956;
+            font-size: 24px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .greeting {
+            font-size: 16px;
+            color: #333;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+        
+        .achievement-highlight {
+            background-color: #28a745;
+            color: white;
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+            margin: 30px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .achievement-highlight::before {
+            content: '🎉';
+            position: absolute;
+            top: 15px;
+            left: 20px;
+            font-size: 30px;
+        }
+        
+        .achievement-highlight::after {
+            content: '💪';
+            position: absolute;
+            bottom: 15px;
+            right: 20px;
+            font-size: 30px;
+        }
+        
+        .achievement-content {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .achievement-title {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        
+        .achievement-desc {
+            font-size: 16px;
+            opacity: 0.9;
+        }
+        
+        .stats-overview {
+            background-color: #f8f9fa;
+            border-radius: 15px;
+            padding: 25px;
+            margin: 30px 0;
+        }
+        
+        .stats-title {
+            color: #232956;
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .stats-title i {
+            margin-right: 10px;
+            color: #df2528;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+        
+        .stat-card {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            border: 2px solid #e9ecef;
+            transition: all 0.3s;
+        }
+        
+        .stat-card:hover {
+            border-color: #df2528;
+            transform: translateY(-3px);
+        }
+        
+        .stat-icon {
+            width: 50px;
+            height: 50px;
+            background-color: #df2528;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 15px;
+            font-size: 20px;
+        }
+        
+        .stat-number {
+            font-size: 28px;
+            font-weight: bold;
+            color: #232956;
+            margin-bottom: 5px;
+        }
+        
+        .stat-label {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+        
+        .stat-change {
+            font-size: 12px;
+            font-weight: 600;
+            padding: 4px 8px;
+            border-radius: 12px;
+        }
+        
+        .stat-increase {
+            background-color: #d4edda;
+            color: #155724;
+        }
+        
+        .stat-decrease {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+        
+        .goals-progress {
+            margin: 30px 0;
+        }
+        
+        .section-title {
+            color: #232956;
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .section-title i {
+            margin-right: 10px;
+            color: #df2528;
+        }
+        
+        .goal-item {
+            background-color: #fff;
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 15px;
+        }
+        
+        .goal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .goal-title {
+            color: #232956;
+            font-weight: 600;
+        }
+        
+        .goal-percentage {
+            background-color: #28a745;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        
+        .progress-bar {
+            width: 100%;
+            height: 10px;
+            background-color: #e9ecef;
+            border-radius: 5px;
+            overflow: hidden;
+            margin-bottom: 10px;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background-color: #28a745;
+            border-radius: 5px;
+            transition: width 0.3s ease;
+        }
+        
+        .goal-details {
+            display: flex;
+            justify-content: space-between;
+            font-size: 14px;
+            color: #666;
+        }
+        
+        .workout-summary {
+            background-color: #e8f5e8;
+            border-radius: 15px;
+            padding: 25px;
+            margin: 30px 0;
+        }
+        
+        .workout-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 15px;
+        }
+        
+        .workout-item {
+            background-color: #fff;
+            border-radius: 8px;
+            padding: 15px;
+            border-left: 4px solid #28a745;
+        }
+        
+        .workout-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        
+        .workout-name {
+            font-weight: 600;
+            color: #232956;
+        }
+        
+        .workout-date {
+            color: #666;
+            font-size: 12px;
+        }
+        
+        .workout-stats {
+            display: flex;
+            gap: 15px;
+            font-size: 14px;
+            color: #155724;
+        }
+        
+        .workout-stat {
+            display: flex;
+            align-items: center;
+        }
+        
+        .workout-stat i {
+            margin-right: 5px;
+        }
+        
+        .nutrition-section {
+            background-color: #fff3cd;
+            border-radius: 15px;
+            padding: 25px;
+            margin: 30px 0;
+        }
+        
+        .nutrition-title {
+            color: #856404;
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .nutrition-title i {
+            margin-right: 10px;
+        }
+        
+        .nutrition-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+        }
+        
+        .nutrition-card {
+            background-color: #fff;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            border: 1px solid #ffeaa7;
+        }
+        
+        .nutrition-value {
+            font-size: 20px;
+            font-weight: bold;
+            color: #856404;
+            margin-bottom: 5px;
+        }
+        
+        .nutrition-label {
+            font-size: 12px;
+            color: #856404;
+        }
+        
+        .achievements-section {
+            background-color: #fff;
+            border: 2px solid #e9ecef;
+            border-radius: 15px;
+            padding: 25px;
+            margin: 30px 0;
+        }
+        
+        .achievement-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+        }
+        
+        .achievement-item:last-child {
+            margin-bottom: 0;
+        }
+        
+        .achievement-icon {
+            width: 40px;
+            height: 40px;
+            background-color: #ffc107;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            font-size: 18px;
+        }
+        
+        .achievement-text {
+            flex: 1;
+        }
+        
+        .achievement-name {
+            font-weight: 600;
+            color: #232956;
+            margin-bottom: 3px;
+        }
+        
+        .achievement-desc {
+            font-size: 14px;
+            color: #666;
+        }
+        
+        .next-month-goals {
+            background-color: #e3f2fd;
+            border-radius: 15px;
+            padding: 25px;
+            margin: 30px 0;
+        }
+        
+        .next-goals-title {
+            color: #1976d2;
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .next-goals-title i {
+            margin-right: 10px;
+        }
+        
+        .next-goal-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 12px;
+            color: #1976d2;
+        }
+        
+        .next-goal-item:last-child {
+            margin-bottom: 0;
+        }
+        
+        .next-goal-item i {
+            margin-right: 10px;
+            color: #2196f3;
+        }
+        
+        .trainer-message {
+            background-color: #232956;
+            color: white;
+            border-radius: 15px;
+            padding: 25px;
+            margin: 30px 0;
+        }
+        
+        .trainer-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .trainer-avatar {
+            width: 50px;
+            height: 50px;
+            background-color: #df2528;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            color: white;
+            font-size: 20px;
+        }
+        
+        .trainer-name {
+            font-weight: 600;
+            font-size: 16px;
+        }
+        
+        .trainer-text {
+            line-height: 1.6;
+            opacity: 0.9;
+            font-style: italic;
+        }
+        
+        .action-buttons {
+            display: flex;
+            gap: 15px;
+            margin: 30px 0;
+        }
+        
+        .btn {
+            flex: 1;
+            padding: 15px 20px;
+            text-decoration: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            text-align: center;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .btn i {
+            margin-right: 8px;
+        }
+        
+        .btn-primary {
+            background-color: #df2528;
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background-color: #c21e21;
+        }
+        
+        .btn-outline {
+            background-color: transparent;
+            color: #232956;
+            border: 2px solid #232956;
+        }
+        
+        .btn-outline:hover {
+            background-color: #232956;
+            color: white;
+        }
+        
+        .footer {
+            background-color: #232956;
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        .footer-links {
+            margin-bottom: 20px;
+        }
+        
+        .footer-links a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+            font-size: 14px;
+        }
+        
+        .social-links {
+            margin: 20px 0;
+        }
+        
+        .social-links a {
+            color: white;
+            font-size: 20px;
+            margin: 0 10px;
+            text-decoration: none;
+        }
+        
+        .copyright {
+            font-size: 12px;
+            color: #ccc;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="email-container">
+        <!-- Header -->
+        <div class="header">
+            <div class="logo">
+                <i class="bi bi-graph-up-arrow"></i>
+            </div>
+            <h1>รายงานความก้าวหน้า</h1>
+            <div class="period">ประจำเดือน มกราคม 2025</div>
+        </div>
+        
+        <!-- Content -->
+        <div class="content">
+            <div class="report-icon">
+                <i class="bi bi-trophy"></i>
+            </div>
+            
+            <h2>ยินดีด้วย! คุณทำได้ยอดเยี่ยม</h2>
+            
+            <div class="greeting">
+                สวัสดีครับ/ค่ะ [ชื่อลูกค้า]<br>
+                มาดูผลการเทรนในเดือนที่ผ่านมากันเลย
+            </div>
+            
+            <!-- Achievement Highlight -->
+            <div class="achievement-highlight">
+                <div class="achievement-content">
+                    <div class="achievement-title">เป้าหมายเดือนนี้สำเร็จ 85%</div>
+                    <div class="achievement-desc">คุณเทรนครบตามกำหนด 12 จาก 14 เซสชัน</div>
+                </div>
+            </div>
+            
+            <!-- Stats Overview -->
+            <div class="stats-overview">
+                <h3 class="stats-title">
+                    <i class="bi bi-bar-chart"></i> สถิติการเทรนโดยรวม
+                </h3>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="bi bi-calendar-check"></i>
+                        </div>
+                        <div class="stat-number">12</div>
+                        <div class="stat-label">เซสชันที่เสร็จสิ้น</div>
+                        <div class="stat-change stat-increase">+3 จากเดือนก่อน</div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="bi bi-clock"></i>
+                        </div>
+                        <div class="stat-number">18</div>
+                        <div class="stat-label">ชั่วโมงการเทรน</div>
+                        <div class="stat-change stat-increase">+4.5 ชม.</div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="bi bi-fire"></i>
+                        </div>
+                        <div class="stat-number">2,840</div>
+                        <div class="stat-label">แคลอรี่ที่เผาผลาญ</div>
+                        <div class="stat-change stat-increase">+420 แคล</div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="bi bi-speedometer2"></i>
+                        </div>
+                        <div class="stat-number">-2.5</div>
+                        <div class="stat-label">น้ำหนักลด (กก.)</div>
+                        <div class="stat-change stat-increase">ตามเป้าหมาย</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Goals Progress -->
+            <div class="goals-progress">
+                <h3 class="section-title">
+                    <i class="bi bi-target"></i> ความก้าวหน้าตามเป้าหมาย
+                </h3>
+                
+                <div class="goal-item">
+                    <div class="goal-header">
+                        <span class="goal-title">ลดน้ำหนัก 5 กิโลกรัม</span>
+                        <span class="goal-percentage">50%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 50%;"></div>
+                    </div>
+                    <div class="goal-details">
+                        <span>ลดไปแล้ว: 2.5 กก.</span>
+                        <span>เป้าหมาย: 5 กก.</span>
+                    </div>
+                </div>
+                
+                <div class="goal-item">
+                    <div class="goal-header">
+                        <span class="goal-title">เพิ่มกล้ามเนื้อแขน</span>
+                        <span class="goal-percentage">75%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 75%;"></div>
+                    </div>
+                    <div class="goal-details">
+                        <span>เพิ่มขึ้น: 1.2 ซม.</span>
+                        <span>เป้าหมาย: 1.5 ซม.</span>
+                    </div>
+                </div>
+                
+                <div class="goal-item">
+                    <div class="goal-header">
+                        <span class="goal-title">วิ่งได้ 5 กม. ไม่หยุด</span>
+                        <span class="goal-percentage">90%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 90%;"></div>
+                    </div>
+                    <div class="goal-details">
+                        <span>ปัจจุบัน: 4.5 กม.</span>
+                        <span>เป้าหมาย: 5 กม.</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Workout Summary -->
+            <div class="workout-summary">
+                <h3 class="section-title" style="color: #155724;">
+                    <i class="bi bi-activity"></i> การเทรนที่โดดเด่น
+                </h3>
+                
+                <div class="workout-grid">
+                    <div class="workout-item">
+                        <div class="workout-header">
+                            <span class="workout-name">Upper Body Strength</span>
+                            <span class="workout-date">15 ม.ค. 2025</span>
+                        </div>
+                        <div class="workout-stats">
+                            <div class="workout-stat">
+                                <i class="bi bi-clock"></i>
+                                <span>90 นาที</span>
+                            </div>
+                            <div class="workout-stat">
+                                <i class="bi bi-fire"></i>
+                                <span>280 แคล</span>
+                            </div>
+                            <div class="workout-stat">
+                                <i class="bi bi-heart"></i>
+                                <span>HR เฉลี่ย 142</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="workout-item">
+                        <div class="workout-header">
+                            <span class="workout-name">Cardio HIIT</span>
+                            <span class="workout-date">12 ม.ค. 2025</span>
+                        </div>
+                        <div class="workout-stats">
+                            <div class="workout-stat">
+                                <i class="bi bi-clock"></i>
+                                <span>60 นาที</span>
+                            </div>
+                            <div class="workout-stat">
+                                <i class="bi bi-fire"></i>
+                                <span>350 แคล</span>
+                            </div>
+                            <div class="workout-stat">
+                                <i class="bi bi-heart"></i>
+                                <span>HR เฉลี่ย 165</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="workout-item">
+                        <div class="workout-header">
+                            <span class="workout-name">Full Body Circuit</span>
+                            <span class="workout-date">8 ม.ค. 2025</span>
+                        </div>
+                        <div class="workout-stats">
+                            <div class="workout-stat">
+                                <i class="bi bi-clock"></i>
+                                <span>75 นาที</span>
+                            </div>
+                            <div class="workout-stat">
+                                <i class="bi bi-fire"></i>
+                                <span>320 แคล</span>
+                            </div>
+                            <div class="workout-stat">
+                                <i class="bi bi-heart"></i>
+                                <span>HR เฉลี่ย 155</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Nutrition Section -->
+            <div class="nutrition-section">
+                <h3 class="nutrition-title">
+                    <i class="bi bi-apple"></i> สรุปโภชนาการ
+                </h3>
+                <div class="nutrition-stats">
+                    <div class="nutrition-card">
+                        <div class="nutrition-value">87%</div>
+                        <div class="nutrition-label">ปฏิบัติตามแผน</div>
+                    </div>
+                    <div class="nutrition-card">
+                        <div class="nutrition-value">1,650</div>
+                        <div class="nutrition-label">แคลอรี่เฉลี่ย/วัน</div>
+                    </div>
+                    <div class="nutrition-card">
+                        <div class="nutrition-value">125g</div>
+                        <div class="nutrition-label">โปรตีนเฉลี่ย/วัน</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Achievements -->
+            <div class="achievements-section">
+                <h3 class="section-title">
+                    <i class="bi bi-award"></i> ความสำเร็จในเดือนนี้
+                </h3>
+                
+                <div class="achievement-item">
+                    <div class="achievement-icon">
+                        <i class="bi bi-trophy"></i>
+                    </div>
+                    <div class="achievement-text">
+                        <div class="achievement-name">นักเทรนขยัน</div>
+                        <div class="achievement-desc">เทรนครบ 12 เซสชันติดต่อกัน</div>
+                    </div>
+                </div>
+                
+                <div class="achievement-item">
+                    <div class="achievement-icon">
+                        <i class="bi bi-lightning"></i>
+                    </div>
+                    <div class="achievement-text">
+                        <div class="achievement-name">พลังแรงสุด</div>
+                        <div class="achievement-desc">ยกน้ำหนักเพิ่มขึ้น 15% จากเดือนก่อน</div>
+                    </div>
+                </div>
+                
+                <div class="achievement-item">
+                    <div class="achievement-icon">
+                        <i class="bi bi-heart"></i>
+                    </div>
+                    <div class="achievement-text">
+                        <div class="achievement-name">สุขภาพหัวใจดี</div>
+                        <div class="achievement-desc">อัตราการเต้นของหัวใจขณะพักดีขึ้น 8%</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Next Month Goals -->
+            <div class="next-month-goals">
+                <h3 class="next-goals-title">
+                    <i class="bi bi-calendar-plus"></i> เป้าหมายเดือนกุมภาพันธ์
+                </h3>
+                
+                <div class="next-goal-item">
+                    <i class="bi bi-bullseye"></i>
+                    <span>ลดน้ำหนักอีก 2 กิโลกรัม (เป้าหมายรวม 4.5 กก.)</span>
+                </div>
+                <div class="next-goal-item">
+                    <i class="bi bi-speedometer"></i>
+                    <span>วิ่งได้ 5 กิโลเมตรไม่หยุด</span>
+                </div>
+                <div class="next-goal-item">
+                    <i class="bi bi-muscle"></i>
+                    <span>เพิ่มน้ำหนักยกในแต่ละท่า 10%</span>
+                </div>
+                <div class="next-goal-item">
+                    <i class="bi bi-calendar-check"></i>
+                    <span>เทรนให้ครบ 16 เซสชัน</span>
+                </div>
+            </div>
+            
+            <!-- Trainer Message -->
+            <div class="trainer-message">
+                <div class="trainer-header">
+                    <div class="trainer-avatar">
+                        <i class="bi bi-person"></i>
+                    </div>
+                    <div class="trainer-name">ข้อความจากอาจารย์สมชาย</div>
+                </div>
+                <div class="trainer-text">
+                    "ยินดีด้วยครับสำหรับผลงานในเดือนนี้! การลดน้ำหนัก 2.5 กก. ในเดือนแรกถือว่าดีมากแล้ว 
+                    เดือนหน้าเราจะเน้นการเพิ่มความแข็งแรงและความทนทานมากขึ้น แล้วจะมาเซฟที่ Cardio HIIT 
+                    เพื่อเร่งการเผาผลาญไขมันให้ดียิ่งขึ้น ต่อไปนี้จะสนุกมากๆ ครับ!"
+                </div>
+            </div>
+            
+            <!-- Action Buttons -->
+            <div class="action-buttons">
+                <a href="#" class="btn btn-primary">
+                    <i class="bi bi-calendar-plus"></i> จองเซสชันเดือนหน้า
+                </a>
+                <a href="#" class="btn btn-outline">
+                    <i class="bi bi-file-earmark-text"></i> ดูรายงานแบบเต็ม
+                </a>
+            </div>
+            
+            <div style="text-align: center; color: #666; margin-top: 30px; font-size: 14px;">
+                <i class="bi bi-info-circle"></i> 
+                รายงานนี้สร้างขึ้นโดยอัตโนมัติจากข้อมูลการเทรนและโภชนาการของคุณ<br>
+                หากมีคำถามเพิ่มเติม สามารถแชทกับเทรนเนอร์ได้ตลอดเวลา
+            </div>
+        </div>
+        
+        <!-- Footer -->
+        <div class="footer">
+            <div class="footer-links">
+                <a href="#">ดูรายงานทั้งหมด</a>
+                <a href="#">ตั้งเป้าหมายใหม่</a>
+                <a href="#">แชทกับเทรนเนอร์</a>
+                <a href="#">แชร์ความสำเร็จ</a>
+            </div>
+            
+            <div class="social-links">
+                <a href="#"><i class="bi bi-facebook"></i></a>
+                <a href="#"><i class="bi bi-instagram"></i></a>
+                <a href="#"><i class="bi bi-line"></i></a>
+                <a href="#"><i class="bi bi-youtube"></i></a>
+            </div>
+            
+            <div class="copyright">
+                © 2025 FitTrainer. สงวนลิขสิทธิ์
+            </div>
+        </div>
+    </div>
+</body>
+</html>

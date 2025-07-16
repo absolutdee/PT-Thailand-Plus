@@ -1,0 +1,856 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ยินดีต้อนรับสู่ครอบครัว FitTrainer!</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            background-color: #f8f9fa;
+        }
+        
+        .email-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .header {
+            background-color: #28a745;
+            padding: 30px 20px;
+            text-align: center;
+            color: white;
+            position: relative;
+        }
+        
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+            opacity: 0.1;
+        }
+        
+        .header h1 {
+            font-size: 28px;
+            font-weight: 600;
+            margin-bottom: 10px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .header .logo {
+            font-size: 40px;
+            margin-bottom: 15px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .content {
+            padding: 40px 30px;
+        }
+        
+        .celebration-icon {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .celebration-icon i {
+            font-size: 60px;
+            color: #28a745;
+            background-color: #d4edda;
+            padding: 20px;
+            border-radius: 50%;
+            animation: bounce 2s infinite;
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-10px); }
+            60% { transform: translateY(-5px); }
+        }
+        
+        .approval-badge {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+        
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            background-color: #d4edda;
+            color: #155724;
+            padding: 12px 25px;
+            border-radius: 25px;
+            font-weight: 600;
+            border: 2px solid #c3e6cb;
+            font-size: 16px;
+        }
+        
+        .badge i {
+            margin-right: 8px;
+            font-size: 18px;
+        }
+        
+        h2 {
+            color: #232956;
+            font-size: 24px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .greeting {
+            font-size: 16px;
+            color: #333;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+        
+        .congratulations-section {
+            background-color: #28a745;
+            color: white;
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+            margin: 30px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .congratulations-section::before {
+            content: '🎉';
+            position: absolute;
+            top: 15px;
+            left: 20px;
+            font-size: 30px;
+        }
+        
+        .congratulations-section::after {
+            content: '🎊';
+            position: absolute;
+            bottom: 15px;
+            right: 20px;
+            font-size: 30px;
+        }
+        
+        .congratulations-content {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .congrats-title {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        
+        .congrats-desc {
+            font-size: 16px;
+            opacity: 0.9;
+        }
+        
+        .trainer-profile {
+            background-color: #f8f9fa;
+            border-radius: 15px;
+            padding: 25px;
+            margin: 30px 0;
+            border-left: 4px solid #28a745;
+        }
+        
+        .profile-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .profile-avatar {
+            width: 80px;
+            height: 80px;
+            background-color: #df2528;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 20px;
+            color: white;
+            font-size: 30px;
+        }
+        
+        .profile-info h4 {
+            color: #232956;
+            margin-bottom: 8px;
+            font-size: 20px;
+        }
+        
+        .profile-info p {
+            color: #666;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+        
+        .approval-status {
+            display: inline-flex;
+            align-items: center;
+            background-color: #d4edda;
+            color: #155724;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+        
+        .approval-status i {
+            margin-right: 6px;
+        }
+        
+        .profile-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .stat-box {
+            background-color: #fff;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            border: 1px solid #dee2e6;
+        }
+        
+        .stat-number {
+            font-size: 20px;
+            font-weight: bold;
+            color: #28a745;
+            display: block;
+        }
+        
+        .stat-label {
+            font-size: 12px;
+            color: #666;
+            margin-top: 5px;
+        }
+        
+        .benefits-section {
+            background-color: #fff3cd;
+            border-radius: 15px;
+            padding: 25px;
+            margin: 30px 0;
+        }
+        
+        .benefits-title {
+            color: #856404;
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .benefits-title i {
+            margin-right: 10px;
+        }
+        
+        .benefit-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 15px;
+        }
+        
+        .benefit-item {
+            background-color: #fff;
+            padding: 15px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            border-left: 3px solid #ffc107;
+        }
+        
+        .benefit-icon {
+            width: 40px;
+            height: 40px;
+            background-color: #ffc107;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            color: #856404;
+            font-size: 16px;
+        }
+        
+        .benefit-text {
+            flex: 1;
+        }
+        
+        .benefit-title {
+            font-weight: 600;
+            color: #856404;
+            margin-bottom: 3px;
+        }
+        
+        .benefit-desc {
+            font-size: 14px;
+            color: #856404;
+            opacity: 0.8;
+        }
+        
+        .next-steps {
+            background-color: #e3f2fd;
+            border-radius: 15px;
+            padding: 25px;
+            margin: 30px 0;
+        }
+        
+        .next-steps-title {
+            color: #1976d2;
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .next-steps-title i {
+            margin-right: 10px;
+        }
+        
+        .step-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 15px;
+            background-color: #fff;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 3px solid #2196f3;
+        }
+        
+        .step-item:last-child {
+            margin-bottom: 0;
+        }
+        
+        .step-number {
+            background-color: #2196f3;
+            color: white;
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 12px;
+            margin-right: 12px;
+            flex-shrink: 0;
+        }
+        
+        .step-content {
+            flex: 1;
+            color: #1976d2;
+        }
+        
+        .step-title {
+            font-weight: 600;
+            margin-bottom: 3px;
+        }
+        
+        .step-desc {
+            font-size: 14px;
+            opacity: 0.8;
+        }
+        
+        .commission-info {
+            background-color: #d4edda;
+            border: 2px solid #28a745;
+            border-radius: 15px;
+            padding: 25px;
+            margin: 30px 0;
+            text-align: center;
+        }
+        
+        .commission-title {
+            color: #155724;
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .commission-title i {
+            margin-right: 10px;
+        }
+        
+        .commission-details {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .commission-item {
+            background-color: #fff;
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid #c3e6cb;
+        }
+        
+        .commission-rate {
+            font-size: 24px;
+            font-weight: bold;
+            color: #28a745;
+            margin-bottom: 5px;
+        }
+        
+        .commission-label {
+            font-size: 14px;
+            color: #155724;
+        }
+        
+        .support-resources {
+            background-color: #232956;
+            color: white;
+            border-radius: 15px;
+            padding: 25px;
+            margin: 30px 0;
+        }
+        
+        .support-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .support-title i {
+            margin-right: 10px;
+        }
+        
+        .resource-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+        
+        .resource-item {
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            transition: all 0.3s;
+        }
+        
+        .resource-item:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+        
+        .resource-icon {
+            font-size: 24px;
+            margin-bottom: 10px;
+            color: #df2528;
+        }
+        
+        .resource-name {
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+        
+        .resource-desc {
+            font-size: 12px;
+            opacity: 0.8;
+        }
+        
+        .action-buttons {
+            display: flex;
+            gap: 15px;
+            margin: 30px 0;
+        }
+        
+        .btn {
+            flex: 1;
+            padding: 15px 20px;
+            text-decoration: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            text-align: center;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .btn i {
+            margin-right: 8px;
+        }
+        
+        .btn-primary {
+            background-color: #df2528;
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background-color: #c21e21;
+        }
+        
+        .btn-success {
+            background-color: #28a745;
+            color: white;
+        }
+        
+        .btn-success:hover {
+            background-color: #218838;
+        }
+        
+        .welcome-message {
+            background-color: #f8f9fa;
+            border-left: 4px solid #6c757d;
+            padding: 20px;
+            margin: 25px 0;
+            font-style: italic;
+        }
+        
+        .message-text {
+            color: #333;
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+        
+        .message-author {
+            display: flex;
+            align-items: center;
+            color: #666;
+            font-size: 14px;
+        }
+        
+        .message-author i {
+            margin-right: 8px;
+            color: #6c757d;
+        }
+        
+        .footer {
+            background-color: #232956;
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        .footer-links {
+            margin-bottom: 20px;
+        }
+        
+        .footer-links a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+            font-size: 14px;
+        }
+        
+        .social-links {
+            margin: 20px 0;
+        }
+        
+        .social-links a {
+            color: white;
+            font-size: 20px;
+            margin: 0 10px;
+            text-decoration: none;
+        }
+        
+        .copyright {
+            font-size: 12px;
+            color: #ccc;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="email-container">
+        <!-- Header -->
+        <div class="header">
+            <div class="logo">
+                <i class="bi bi-check-circle"></i>
+            </div>
+            <h1>FitTrainer</h1>
+            <p>ยินดีต้อนรับเทรนเนอร์ใหม่!</p>
+        </div>
+        
+        <!-- Content -->
+        <div class="content">
+            <div class="celebration-icon">
+                <i class="bi bi-party-hat"></i>
+            </div>
+            
+            <div class="approval-badge">
+                <div class="badge">
+                    <i class="bi bi-patch-check"></i>
+                    อนุมัติแล้ว
+                </div>
+            </div>
+            
+            <h2>ยินดีต้อนรับสู่ครอบครัว FitTrainer!</h2>
+            
+            <div class="greeting">
+                สวัสดีครับ/ค่ะ [ชื่อเทรนเนอร์]<br>
+                ขอแสดงความยินดี! ใบสมัครของคุณได้รับการอนุมัติแล้ว
+            </div>
+            
+            <!-- Congratulations Section -->
+            <div class="congratulations-section">
+                <div class="congratulations-content">
+                    <div class="congrats-title">คุณได้เป็นส่วนหนึ่งของ FitTrainer แล้ว!</div>
+                    <div class="congrats-desc">พร้อมเริ่มต้นการเดินทางในฐานะเทรนเนอร์มืออาชีพ</div>
+                </div>
+            </div>
+            
+            <!-- Trainer Profile -->
+            <div class="trainer-profile">
+                <div class="profile-header">
+                    <div class="profile-avatar">
+                        <i class="bi bi-person"></i>
+                    </div>
+                    <div class="profile-info">
+                        <h4>อาจารย์สมชาย ใจดี</h4>
+                        <p><i class="bi bi-geo-alt"></i> กรุงเทพมหานคร</p>
+                        <p><i class="bi bi-award"></i> เทรนเนอร์ส่วนตัว, ลดน้ำหนัก</p>
+                        <div class="approval-status">
+                            <i class="bi bi-shield-check"></i>
+                            ผ่านการตรวจสอบแล้ว
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="profile-stats">
+                    <div class="stat-box">
+                        <span class="stat-number">ID-7845</span>
+                        <div class="stat-label">รหัสเทรนเนอร์</div>
+                    </div>
+                    <div class="stat-box">
+                        <span class="stat-number">19 ม.ค.</span>
+                        <div class="stat-label">วันที่อนุมัติ</div>
+                    </div>
+                    <div class="stat-box">
+                        <span class="stat-number">เริ่มได้เลย</span>
+                        <div class="stat-label">สถานะ</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Benefits Section -->
+            <div class="benefits-section">
+                <h3 class="benefits-title">
+                    <i class="bi bi-gift"></i> ประโยชน์ที่คุณได้รับ
+                </h3>
+                
+                <div class="benefit-grid">
+                    <div class="benefit-item">
+                        <div class="benefit-icon">
+                            <i class="bi bi-people"></i>
+                        </div>
+                        <div class="benefit-text">
+                            <div class="benefit-title">เข้าถึงลูกค้ามากมาย</div>
+                            <div class="benefit-desc">เชื่อมต่อกับลูกค้าใหม่ในพื้นที่ของคุณ</div>
+                        </div>
+                    </div>
+                    
+                    <div class="benefit-item">
+                        <div class="benefit-icon">
+                            <i class="bi bi-calendar-check"></i>
+                        </div>
+                        <div class="benefit-text">
+                            <div class="benefit-title">จัดการตารางได้ง่าย</div>
+                            <div class="benefit-desc">ระบบจัดการนัดหมายอัตโนมัติ</div>
+                        </div>
+                    </div>
+                    
+                    <div class="benefit-item">
+                        <div class="benefit-icon">
+                            <i class="bi bi-cash-stack"></i>
+                        </div>
+                        <div class="benefit-text">
+                            <div class="benefit-title">รายได้เสริมที่สม่ำเสมอ</div>
+                            <div class="benefit-desc">รับเงินทุกสัปดาห์ผ่านระบบอัตโนมัติ</div>
+                        </div>
+                    </div>
+                    
+                    <div class="benefit-item">
+                        <div class="benefit-icon">
+                            <i class="bi bi-tools"></i>
+                        </div>
+                        <div class="benefit-text">
+                            <div class="benefit-title">เครื่องมือครบครัน</div>
+                            <div class="benefit-desc">แอพจัดการลูกค้า รายงาน และแชท</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Commission Info -->
+            <div class="commission-info">
+                <h3 class="commission-title">
+                    <i class="bi bi-percent"></i> โครงสร้างค่าคอมมิชชั่น
+                </h3>
+                <div class="commission-details">
+                    <div class="commission-item">
+                        <div class="commission-rate">75%</div>
+                        <div class="commission-label">Personal Training</div>
+                    </div>
+                    <div class="commission-item">
+                        <div class="commission-rate">70%</div>
+                        <div class="commission-label">Group Training</div>
+                    </div>
+                </div>
+                <p style="color: #155724; font-size: 14px; margin: 0;">
+                    💰 คุณจะได้รับเงินทุกวันศุกร์ ผ่านบัญชีธนาคารที่ลงทะเบียน
+                </p>
+            </div>
+            
+            <!-- Next Steps -->
+            <div class="next-steps">
+                <h3 class="next-steps-title">
+                    <i class="bi bi-list-ol"></i> ขั้นตอนการเริ่มต้น
+                </h3>
+                
+                <div class="step-item">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <div class="step-title">เข้าสู่ระบบเทรนเนอร์</div>
+                        <div class="step-desc">ใช้อีเมลและรหัสผ่านที่สมัครไว้</div>
+                    </div>
+                </div>
+                
+                <div class="step-item">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <div class="step-title">ตั้งค่าโปรไฟล์</div>
+                        <div class="step-desc">เพิ่มรูปภาพ แพคเกจ และช่วงเวลาที่ว่าง</div>
+                    </div>
+                </div>
+                
+                <div class="step-item">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <div class="step-title">เริ่มรับลูกค้า</div>
+                        <div class="step-desc">รอรับการจองจากลูกค้าและเริ่มเทรน</div>
+                    </div>
+                </div>
+                
+                <div class="step-item">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <div class="step-title">สร้างรายได้</div>
+                        <div class="step-desc">ได้รับเงินทุกสัปดาห์ตามการเทรนที่ทำ</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Support Resources -->
+            <div class="support-resources">
+                <h3 class="support-title">
+                    <i class="bi bi-headset"></i> แหล่งความช่วยเหลือ
+                </h3>
+                <div class="resource-grid">
+                    <div class="resource-item">
+                        <div class="resource-icon">
+                            <i class="bi bi-book"></i>
+                        </div>
+                        <div class="resource-name">คู่มือเทรนเนอร์</div>
+                        <div class="resource-desc">วิธีใช้งานและเทคนิค</div>
+                    </div>
+                    
+                    <div class="resource-item">
+                        <div class="resource-icon">
+                            <i class="bi bi-chat-dots"></i>
+                        </div>
+                        <div class="resource-name">แชทสนับสนุน</div>
+                        <div class="resource-desc">ช่วยเหลือตลอด 24 ชม.</div>
+                    </div>
+                    
+                    <div class="resource-item">
+                        <div class="resource-icon">
+                            <i class="bi bi-people"></i>
+                        </div>
+                        <div class="resource-name">ชุมชนเทรนเนอร์</div>
+                        <div class="resource-desc">แลกเปลี่ยนประสบการณ์</div>
+                    </div>
+                    
+                    <div class="resource-item">
+                        <div class="resource-icon">
+                            <i class="bi bi-graph-up"></i>
+                        </div>
+                        <div class="resource-name">เทคนิคการขาย</div>
+                        <div class="resource-desc">เพิ่มลูกค้าและรายได้</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Action Buttons -->
+            <div class="action-buttons">
+                <a href="#" class="btn btn-success">
+                    <i class="bi bi-door-open"></i> เข้าสู่ระบบเทรนเนอร์
+                </a>
+                <a href="#" class="btn btn-primary">
+                    <i class="bi bi-book"></i> ดูคู่มือการใช้งาน
+                </a>
+            </div>
+            
+            <!-- Welcome Message -->
+            <div class="welcome-message">
+                <div class="message-text">
+                    "ยินดีต้อนรับทุกท่านเข้าสู่ครอบครัว FitTrainer! เรามุ่งมั่นที่จะสร้างประสบการณ์ที่ดีที่สุด
+                    ให้กับทั้งเทรนเนอร์และลูกค้า หากมีคำถามหรือข้อเสนอแนะ อย่าลังเลที่จะติดต่อเรา 
+                    เราพร้อมสนับสนุนการเติบโตของคุณในทุกขั้นตอน"
+                </div>
+                <div class="message-author">
+                    <i class="bi bi-person-circle"></i>
+                    ทีมงาน FitTrainer
+                </div>
+            </div>
+            
+            <div style="text-align: center; color: #666; margin-top: 30px; font-size: 14px;">
+                <i class="bi bi-info-circle"></i> 
+                ยินดีต้อนรับสู่ชุมชนเทรนเนอร์ FitTrainer!<br>
+                หากมีคำถามเพิ่มเติม สามารถติดต่อทีมสนับสนุนได้ตลอด 24 ชั่วโมง
+            </div>
+        </div>
+        
+        <!-- Footer -->
+        <div class="footer">
+            <div class="footer-links">
+                <a href="#">คู่มือเทรนเนอร์</a>
+                <a href="#">ชุมชนเทรนเนอร์</a>
+                <a href="#">ติดต่อสนับสนุน</a>
+                <a href="#">เงื่อนไขการใช้งาน</a>
+            </div>
+            
+            <div class="social-links">
+                <a href="#"><i class="bi bi-facebook"></i></a>
+                <a href="#"><i class="bi bi-instagram"></i></a>
+                <a href="#"><i class="bi bi-line"></i></a>
+                <a href="#"><i class="bi bi-youtube"></i></a>
+            </div>
+            
+            <div class="copyright">
+                © 2025 FitTrainer. สงวนลิขสิทธิ์
+            </div>
+        </div>
+    </div>
+</body>
+</html>
