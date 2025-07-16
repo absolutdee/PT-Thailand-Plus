@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>การยกเลิกนัดหมายการเทรน</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            background-color: #f8f9fa;
+        }
+        
+        .email-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .header {
+            background-color: #dc3545;
+            padding: 30px 20px;
+            text-align: center;
+            color: white;
+        }
+        
+        .header h1 {
+            font-size: 28px;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+        
+        .header .logo {
+            font-size: 40px;
+            margin-bottom: 15px;
+        }
+        
+        .content {
+            padding: 40px 30px;
+        }
+        
+        .cancellation-icon {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .cancellation-icon i {
+            font-size: 60px;
+            color: #dc3545;
+            background-color: #f8d7da;
+            padding: 20px;
+            border-radius: 50%;
+        }
+        
+        .status-badge {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+        
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            background-color: #f8d7da;
+            color: #721c24;
+            padding: 12px 25px;
+            border-radius: 25px;
+            font-weight: 600;
+            border: 2px solid #f5c6cb;
+            font-size: 16px;
+        }
+        
+        .badge i {
+            margin-right: 8px;
+            font-size: 18px;
+        }
+        
+        h2 {
+            color: #232956;
+            font-size: 24px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .greeting {
+            font-size: 16px;
+            color: #333;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+        
+        .cancelled-details {
+            background-color: #f8f9fa;
+            border-radius: 10px;
+            padding: 25px;
+            margin: 30px 0;
+            border-left: 4px solid #dc3545;
+        }
+        
+        .detail-row {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            padding: 8px 0;
+        }
+        
+        .detail-row:last-child {
+            margin-bottom: 0;
+        }
+        
+        .detail-icon {
+            font-size: 18px;
+            color: #dc3545;
+            margin-right: 15px;
+            width: 25px;
+        }
+        
+        .detail-label {
+            font-weight: 600;
+            color: #232956;
+            min-width: 120px;
+        }
+        
+        .detail-value {
+            color: #333;
+            flex: 1;
+        }
+        
+        .cancellation-info {
+            background-color: #fff3cd;
+            border: 2px solid #ffc107;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 25px 0;
+        }
+        
+        .cancellation-info h5 {
+            color: #856404;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .cancellation-info h5 i {
+            margin-right: 8px;
+        }
+        
+        .cancellation-reason {
+            background-color: #fff;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 15px 0;
+            font-style: italic;
+            color: #333;
+        }
+        
+        .refund-info {
+            background-color: #d4edda;
+            border: 2px solid #28a745;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 25px 0;
+        }
+        
+        .refund-info h5 {
+            color: #155724;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .refund-info h5 i {
+            margin-right: 8px;
+        }
+        
+        .refund-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            padding: 5px 0;
+        }
+        
+        .refund-item:last-child {
+            margin-bottom: 0;
+            padding-top: 10px;
+            border-top: 1px solid #c3e6cb;
+            font-weight: 600;
+        }
+        
+        .alternative-options {
+            background-color: #e3f2fd;
+            border: 2px solid #2196f3;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 25px 0;
+        }
+        
+        .alternative-options h5 {
+            color: #1976d2;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .alternative-options h5 i {
+            margin-right: 8px;
+        }
+        
+        .option-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 12px;
+            padding: 10px;
+            background-color: #bbdefb;
+            border-radius: 6px;
+            color: #0d47a1;
+        }
+        
+        .option-item:last-child {
+            margin-bottom: 0;
+        }
+        
+        .option-item i {
+            margin-right: 10px;
+            color: #1976d2;
+        }
+        
+        .action-buttons {
+            display: flex;
+            gap: 15px;
+            margin: 30px 0;
+        }
+        
+        .btn {
+            flex: 1;
+            padding: 15px 20px;
+            text-decoration: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            text-align: center;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .btn i {
+            margin-right: 8px;
+        }
+        
+        .btn-primary {
+            background-color: #df2528;
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background-color: #c21e21;
+        }
+        
+        .btn-outline {
+            background-color: transparent;
+            color: #232956;
+            border: 2px solid #232956;
+        }
+        
+        .btn-outline:hover {
+            background-color: #232956;
+            color: white;
+        }
+        
+        .trainer-contact {
+            background-color: #232956;
+            color: white;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 25px 0;
+            text-align: center;
+        }
+        
+        .trainer-contact h5 {
+            margin-bottom: 10px;
+        }
+        
+        .trainer-contact p {
+            margin-bottom: 15px;
+            opacity: 0.9;
+            font-size: 14px;
+        }
+        
+        .important-note {
+            background-color: #f8d7da;
+            border: 2px solid #dc3545;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 25px 0;
+        }
+        
+        .important-note h6 {
+            color: #721c24;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .important-note h6 i {
+            margin-right: 8px;
+        }
+        
+        .important-note p {
+            color: #721c24;
+            margin: 0;
+            font-size: 14px;
+        }
+        
+        .footer {
+            background-color: #232956;
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        .footer-links {
+            margin-bottom: 20px;
+        }
+        
+        .footer-links a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+            font-size: 14px;
+        }
+        
+        .social-links {
+            margin: 20px 0;
+        }
+        
+        .social-links a {
+            color: white;
+            font-size: 20px;
+            margin: 0 10px;
+            text-decoration: none;
+        }
+        
+        .copyright {
+            font-size: 12px;
+            color: #ccc;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="email-container">
+        <!-- Header -->
+        <div class="header">
+            <div class="logo">
+                <i class="bi bi-calendar-x"></i>
+            </div>
+            <h1>FitTrainer</h1>
+            <p>การยกเลิกนัดหมาย</p>
+        </div>
+        
+        <!-- Content -->
+        <div class="content">
+            <div class="cancellation-icon">
+                <i class="bi bi-x-circle"></i>
+            </div>
+            
+            <div class="status-badge">
+                <div class="badge">
+                    <i class="bi bi-x-circle"></i>
+                    นัดหมายถูกยกเลิก
+                </div>
+            </div>
+            
+            <h2>นัดหมายการเทรนถูกยกเลิกแล้ว</h2>
+            
+            <div class="greeting">
+                สวัสดีครับ/ค่ะ [ชื่อลูกค้า]<br>
+                เราขออภัยที่ต้องแจ้งให้ทราบว่านัดหมายการเทรนของคุณถูกยกเลิก
+            </div>
+            
+            <!-- Cancelled Details -->
+            <div class="cancelled-details">
+                <div class="detail-row">
+                    <i class="bi bi-hash detail-icon"></i>
+                    <span class="detail-label">หมายเลขการจอง:</span>
+                    <span class="detail-value">#FT2025001234</span>
+                </div>
+                <div class="detail-row">
+                    <i class="bi bi-calendar3 detail-icon"></i>
+                    <span class="detail-label">วันที่:</span>
+                    <span class="detail-value">วันจันทร์ที่ 20 มกราคม 2025</span>
+                </div>
+                <div class="detail-row">
+                    <i class="bi bi-clock detail-icon"></i>
+                    <span class="detail-label">เวลา:</span>
+                    <span class="detail-value">09:00 - 10:30 น.</span>
+                </div>
+                <div class="detail-row">
+                    <i class="bi bi-person detail-icon"></i>
+                    <span class="detail-label">เทรนเนอร์:</span>
+                    <span class="detail-value">อาจารย์สมชาย ใจดี</span>
+                </div>
+                <div class="detail-row">
+                    <i class="bi bi-geo-alt detail-icon"></i>
+                    <span class="detail-label">สถานที่:</span>
+                    <span class="detail-value">Fitness First พระราม 4</span>
+                </div>
+            </div>
+            
+            <!-- Cancellation Info -->
+            <div class="cancellation-info">
+                <h5><i class="bi bi-info-circle"></i> สาเหตุการยกเลิก</h5>
+                <div class="cancellation-reason">
+                    "ขออภัยครับ เนื่องจากมีเหตุฉุกเฉินทางครอบครัว ทำให้ผมไม่สามารถให้บริการในวันดังกล่าวได้ 
+                    ผมจะประสานงานเพื่อจัดหาเวลาทดแทนให้ในเร็วที่สุดครับ"
+                </div>
+                <p style="color: #856404; font-size: 14px; margin: 10px 0 0 0;">
+                    <strong>ยกเลิกโดย:</strong> เทรนเนอร์ • <strong>เมื่อ:</strong> 19 ม.ค. 2025 เวลา 08:30 น.
+                </p>
+            </div>
+            
+            <!-- Refund Info -->
+            <div class="refund-info">
+                <h5><i class="bi bi-cash-coin"></i> การคืนเงิน</h5>
+                <div class="refund-item">
+                    <span>ค่าบริการการเทรน:</span>
+                    <span>1,200.00 ฿</span>
+                </div>
+                <div class="refund-item">
+                    <span>ค่าธรรมเนียมการยกเลิก:</span>
+                    <span>0.00 ฿</span>
+                </div>
+                <div class="refund-item">
+                    <span>จำนวนเงินที่คืนให้:</span>
+                    <span>1,200.00 ฿</span>
+                </div>
+                <p style="color: #155724; font-size: 14px; margin: 15px 0 0 0;">
+                    💳 เงินจะถูกคืนเข้าบัญชีเดิมภายใน 3-5 วันทำการ
+                </p>
+            </div>
+            
+            <!-- Alternative Options -->
+            <div class="alternative-options">
+                <h5><i class="bi bi-lightbulb"></i> ทางเลือกสำหรับคุณ</h5>
+                <div class="option-item">
+                    <i class="bi bi-calendar-plus"></i>
+                    <span>จองนัดใหม่กับเทรนเนอร์คนเดิม</span>
+                </div>
+                <div class="option-item">
+                    <i class="bi bi-people"></i>
+                    <span>หาเทรนเนอร์ทดแทนในพื้นที่เดียวกัน</span>
+                </div>
+                <div class="option-item">
+                    <i class="bi bi-gift"></i>
+                    <span>รับคูปองส่วนลด 15% สำหรับการจองครั้งต่อไป</span>
+                </div>
+                <div class="option-item">
+                    <i class="bi bi-headset"></i>
+                    <span>ติดต่อฝ่ายลูกค้าสัมพันธ์เพื่อขอความช่วยเหลือ</span>
+                </div>
+            </div>
+            
+            <!-- Action Buttons -->
+            <div class="action-buttons">
+                <a href="#" class="btn btn-primary">
+                    <i class="bi bi-calendar-plus"></i> จองใหม่
+                </a>
+                <a href="#" class="btn btn-outline">
+                    <i class="bi bi-search"></i> หาเทรนเนอร์ใหม่
+                </a>
+            </div>
+            
+            <!-- Trainer Contact -->
+            <div class="trainer-contact">
+                <h5><i class="bi bi-chat-dots"></i> ติดต่อเทรนเนอร์</h5>
+                <p>หากต้องการประสานงานเวลาใหม่หรือมีคำถาม สามารถแชทกับเทรนเนอร์ได้โดยตรง</p>
+                <a href="#" class="btn btn-primary" style="width: auto; display: inline-flex;">
+                    <i class="bi bi-envelope"></i> ส่งข้อความ
+                </a>
+            </div>
+            
+            <!-- Important Note -->
+            <div class="important-note">
+                <h6><i class="bi bi-exclamation-triangle"></i> ข้อมูลสำคัญ</h6>
+                <p>• การยกเลิกนี้จะไม่ส่งผลต่อเครดิตในแพคเกจของคุณ</p>
+                <p>• คุณยังสามารถใช้เซสชันที่เหลือได้ตามปกติ</p>
+                <p>• หากมีปัญหาเกี่ยวกับการคืนเงิน กรุณาติดต่อฝ่ายสนับสนุน</p>
+            </div>
+            
+            <div style="text-align: center; color: #666; margin-top: 30px; font-size: 14px;">
+                <i class="bi bi-info-circle"></i> 
+                หมายเลขอ้างอิง: CXL-FT-20250119083045<br>
+                เราขออภัยในความไม่สะดวกและหวังว่าจะได้ให้บริการคุณอีกครั้งในอนาคต
+            </div>
+        </div>
+        
+        <!-- Footer -->
+        <div class="footer">
+            <div class="footer-links">
+                <a href="#">นโยบายการยกเลิก</a>
+                <a href="#">ติดต่อเรา</a>
+                <a href="#">ช่วยเหลือ</a>
+                <a href="#">หาเทรนเนอร์ใหม่</a>
+            </div>
+            
+            <div class="social-links">
+                <a href="#"><i class="bi bi-facebook"></i></a>
+                <a href="#"><i class="bi bi-instagram"></i></a>
+                <a href="#"><i class="bi bi-line"></i></a>
+                <a href="#"><i class="bi bi-youtube"></i></a>
+            </div>
+            
+            <div class="copyright">
+                © 2025 FitTrainer. สงวนลิขสิทธิ์
+            </div>
+        </div>
+    </div>
+</body>
+</html>
