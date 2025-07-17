@@ -1,0 +1,174 @@
+// SwipeableViews.scss
+$primary-color: #232956;
+$secondary-color: #df2528;
+$dark-color: #1a1d3e;
+$light-color: #f8f9fa;
+$gray-color: #6c757d;
+
+.swipeable-views-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  touch-action: pan-y; // Allow vertical scrolling
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+
+  &.vertical {
+    touch-action: pan-x; // Allow horizontal scrolling for vertical swipes
+  }
+
+  // Prevent text selection during swipe
+  * {
+    user-select: none;
+    -webkit-user-select: none;
+  }
+
+  .swipeable-views-wrapper {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    
+    &.animating {
+      .swipeable-view {
+        transition: transform cubic-bezier(0.4, 0.0, 0.2, 1);
+      }
+    }
+
+    .swipeable-view {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      will-change: transform;
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
+      
+      // Improve performance on mobile
+      transform: translateZ(0);
+      -webkit-transform: translateZ(0);
+      
+      &.active {
+        z-index: 2;
+      }
+    }
+  }
+
+  // Indicators
+  .swipeable-indicators {
+    position: absolute;
+    bottom: 16px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 8px;
+    z-index: 10;
+    padding: 8px 12px;
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 20px;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+
+    .indicator {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background-color: rgba(255, 255, 255, 0.5);
+      border: none;
+      padding: 0;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      
+      &:hover {
+        background-color: rgba(255, 255, 255, 0.7);
+        transform: scale(1.2);
+      }
+
+      &.active {
+        width: 24px;
+        border-radius: 4px;
+        background-color: white;
+      }
+    }
+  }
+}
+
+// Vertical orientation
+.swipeable-views-container.vertical {
+  .swipeable-views-wrapper {
+    flex-direction: column;
+  }
+}
+
+// Loading states
+.swipeable-view-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  
+  .spinner {
+    width: 40px;
+    height: 40px;
+    border: 3px solid $light-color;
+    border-top-color: $primary-color;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+  }
+}
+
+// Animations
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+// Responsive adjustments
+@media (max-width: 375px) {
+  .swipeable-indicators {
+    bottom: 12px;
+    padding: 6px 10px;
+    
+    .indicator {
+      width: 6px;
+      height: 6px;
+      
+      &.active {
+        width: 18px;
+      }
+    }
+  }
+}
+
+// Performance optimizations for mobile
+@media (hover: none) and (pointer: coarse) {
+  .swipeable-views-container {
+    // Improve touch responsiveness
+    -webkit-tap-highlight-color: transparent;
+    
+    .swipeable-view {
+      // Hardware acceleration
+      transform: translate3d(0, 0, 0);
+      -webkit-transform: translate3d(0, 0, 0);
+    }
+  }
+}
+
+// Dark mode support
+@media (prefers-color-scheme: dark) {
+  .swipeable-indicators {
+    background-color: rgba(255, 255, 255, 0.1);
+    
+    .indicator {
+      background-color: rgba(255, 255, 255, 0.3);
+      
+      &.active {
+        background-color: $secondary-color;
+      }
+    }
+  }
+}
