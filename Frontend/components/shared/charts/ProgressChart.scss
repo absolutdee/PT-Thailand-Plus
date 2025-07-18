@@ -1,0 +1,48 @@
+// Frontend/components/shared/charts/ProgressChart.scss
+.progress-chart {
+  width: 100%;
+  background: white;
+  border-radius: 12px;
+  padding: 20px;
+
+  &__tooltip {
+    background: white;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  &__tooltip-date {
+    font-weight: 600;
+    color: #333;
+    margin: 0 0 8px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #f0f0f0;
+  }
+
+  &__tooltip-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 4px 0;
+    font-size: 14px;
+  }
+
+  &__tooltip-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  &__tooltip-label {
+    color: #666;
+  }
+
+  &__tooltip-value {
+    font-weight: 600;
+    color: #333;
+    margin-left: auto;
+  }
+}
