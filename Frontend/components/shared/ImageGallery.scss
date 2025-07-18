@@ -1,0 +1,241 @@
+// Frontend/components/shared/ImageGallery.scss
+.image-gallery {
+  width: 100%;
+
+  &__main {
+    margin-bottom: 16px;
+  }
+
+  &__main-image {
+    position: relative;
+    width: 100%;
+    aspect-ratio: var(--aspect-ratio, 16/9);
+    border-radius: 12px;
+    overflow: hidden;
+    cursor: zoom-in;
+    background-color: #f5f5f5;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    &:hover .image-gallery__main-actions {
+      opacity: 1;
+    }
+  }
+
+  &__main-actions {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    display: flex;
+    gap: 8px;
+    opacity: 0;
+    transition: opacity 0.2s;
+  }
+
+  &__thumbnails {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+    gap: 8px;
+  }
+
+  &__thumbnail {
+    position: relative;
+    aspect-ratio: 1;
+    border-radius: 8px;
+    overflow: hidden;
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: all 0.2s;
+    background-color: #f5f5f5;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    &:hover {
+      transform: scale(1.05);
+    }
+
+    &--active {
+      border-color: #232956;
+    }
+
+    &:hover .image-gallery__thumbnail-actions {
+      opacity: 1;
+    }
+  }
+
+  &__thumbnail-actions {
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    display: flex;
+    gap: 4px;
+    opacity: 0;
+    transition: opacity 0.2s;
+  }
+
+  &__empty-slot {
+    aspect-ratio: 1;
+    border: 2px dashed #ddd;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s;
+    color: #999;
+    font-size: 12px;
+
+    svg {
+      margin-bottom: 4px;
+    }
+
+    &:hover {
+      border-color: #232956;
+      color: #232956;
+    }
+  }
+
+  &__action-btn {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.6);
+    border: none;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s;
+
+    &:hover {
+      background: rgba(0, 0, 0, 0.8);
+    }
+
+    &--primary {
+      background: #232956;
+      
+      &:hover {
+        background: #1a1f3a;
+      }
+    }
+  }
+
+  &__fullscreen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.95);
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: fadeIn 0.3s;
+
+    img {
+      max-width: 90%;
+      max-height: 90vh;
+      object-fit: contain;
+    }
+  }
+
+  &__fullscreen-close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.2);
+    }
+  }
+
+  &__fullscreen-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.2);
+    }
+
+    &--prev {
+      left: 20px;
+    }
+
+    &--next {
+      right: 20px;
+    }
+  }
+
+  &__fullscreen-counter {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: white;
+    font-size: 14px;
+    padding: 8px 16px;
+    background: rgba(0, 0, 0, 0.6);
+    border-radius: 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .image-gallery {
+    &__thumbnails {
+      grid-template-columns: repeat(auto-fill, minmax(60px, 1fr));
+    }
+
+    &__fullscreen {
+      img {
+        max-width: 100%;
+      }
+    }
+
+    &__fullscreen-nav {
+      width: 40px;
+      height: 40px;
+
+      &--prev {
+        left: 10px;
+      }
+
+      &--next {
+        right: 10px;
+      }
+    }
+  }
+}
