@@ -1,0 +1,176 @@
+/ Frontend/components/shared/Toast.scss
+.toast {
+  display: flex;
+  align-items: center;
+  min-width: 300px;
+  max-width: 500px;
+  padding: 16px;
+  margin: 8px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  animation: slideIn 0.3s ease-out;
+  transition: all 0.3s ease;
+
+  &--exiting {
+    animation: slideOut 0.3s ease-in forwards;
+  }
+
+  &--success {
+    border-left: 4px solid #28a745;
+    
+    .toast__icon {
+      color: #28a745;
+    }
+  }
+
+  &--error {
+    border-left: 4px solid #dc3545;
+    
+    .toast__icon {
+      color: #dc3545;
+    }
+  }
+
+  &--warning {
+    border-left: 4px solid #ffc107;
+    
+    .toast__icon {
+      color: #ffc107;
+    }
+  }
+
+  &--info {
+    border-left: 4px solid #17a2b8;
+    
+    .toast__icon {
+      color: #17a2b8;
+    }
+  }
+
+  &__icon {
+    flex-shrink: 0;
+    margin-right: 12px;
+  }
+
+  &__content {
+    flex: 1;
+  }
+
+  &__message {
+    margin: 0;
+    font-size: 14px;
+    color: #333;
+    line-height: 1.5;
+  }
+
+  &__close {
+    flex-shrink: 0;
+    margin-left: 12px;
+    background: none;
+    border: none;
+    padding: 4px;
+    cursor: pointer;
+    color: #999;
+    transition: color 0.2s;
+
+    &:hover {
+      color: #666;
+    }
+  }
+
+  // Position variants
+  &--top-right {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 9999;
+  }
+
+  &--top-left {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    z-index: 9999;
+  }
+
+  &--bottom-right {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 9999;
+  }
+
+  &--bottom-left {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    z-index: 9999;
+  }
+
+  &--top-center {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 9999;
+  }
+
+  &--bottom-center {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 9999;
+  }
+}
+
+.toast-container {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 9999;
+  pointer-events: none;
+
+  .toast {
+    pointer-events: all;
+    margin-bottom: 8px;
+  }
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideOut {
+  from {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+}
+
+@media (max-width: 576px) {
+  .toast {
+    min-width: calc(100vw - 40px);
+    max-width: calc(100vw - 40px);
+    
+    &--top-right,
+    &--top-left,
+    &--bottom-right,
+    &--bottom-left {
+      left: 20px;
+      right: 20px;
+    }
+  }
+}
