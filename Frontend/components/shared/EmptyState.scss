@@ -1,0 +1,95 @@
+// Frontend/components/shared/EmptyState.scss
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 60px 20px;
+  width: 100%;
+
+  &__icon {
+    color: #e0e0e0;
+    margin-bottom: 24px;
+    
+    svg {
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  &__image {
+    max-width: 100%;
+    height: auto;
+  }
+
+  &__title {
+    font-size: 20px;
+    font-weight: 600;
+    color: #333;
+    margin: 0 0 12px;
+  }
+
+  &__message {
+    font-size: 16px;
+    color: #666;
+    margin: 0 0 24px;
+    max-width: 400px;
+    line-height: 1.6;
+  }
+
+  &__action {
+    .btn {
+      min-width: 150px;
+    }
+  }
+
+  // Size variants
+  &--small {
+    padding: 40px 20px;
+
+    .empty-state__icon {
+      width: 48px;
+      height: 48px;
+      margin-bottom: 16px;
+    }
+
+    .empty-state__title {
+      font-size: 18px;
+      margin-bottom: 8px;
+    }
+
+    .empty-state__message {
+      font-size: 14px;
+      margin-bottom: 16px;
+    }
+  }
+
+  &--medium {
+    .empty-state__icon {
+      width: 64px;
+      height: 64px;
+    }
+  }
+
+  &--large {
+    padding: 80px 20px;
+
+    .empty-state__icon {
+      width: 80px;
+      height: 80px;
+      margin-bottom: 32px;
+    }
+
+    .empty-state__title {
+      font-size: 24px;
+      margin-bottom: 16px;
+    }
+
+    .empty-state__message {
+      font-size: 18px;
+      margin-bottom: 32px;
+      max-width: 500px;
+    }
+  }
+}
