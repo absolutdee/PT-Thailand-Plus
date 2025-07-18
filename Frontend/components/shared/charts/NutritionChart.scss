@@ -1,0 +1,141 @@
+// Frontend/components/shared/charts/NutritionChart.scss
+.nutrition-chart {
+  background: white;
+  border-radius: 12px;
+  padding: 24px;
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+
+  &__title {
+    font-size: 18px;
+    font-weight: 600;
+    color: #232956;
+    margin: 0;
+  }
+
+  &__controls {
+    display: flex;
+    gap: 8px;
+  }
+
+  &__control {
+    width: 32px;
+    height: 32px;
+    border: 1px solid #e0e0e0;
+    background: white;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s;
+    color: #666;
+
+    &:hover {
+      border-color: #232956;
+      color: #232956;
+    }
+
+    &.active {
+      background: #232956;
+      border-color: #232956;
+      color: white;
+    }
+  }
+
+  &__tooltip {
+    background: white;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  &__tooltip-title {
+    font-weight: 600;
+    color: #333;
+    margin: 0 0 8px;
+  }
+
+  &__tooltip-item {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    font-size: 14px;
+  }
+
+  &__tooltip-label {
+    color: #666;
+  }
+
+  &__tooltip-value {
+    font-weight: 600;
+    color: #333;
+  }
+
+  &__calories {
+    &-chart {
+      position: relative;
+      margin-bottom: 24px;
+    }
+
+    &-center {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+    }
+
+    &-percent {
+      font-size: 32px;
+      font-weight: 700;
+      color: #232956;
+      line-height: 1;
+    }
+
+    &-label {
+      font-size: 14px;
+      color: #666;
+      margin-top: 4px;
+    }
+
+    &-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    &-stat {
+      text-align: center;
+      padding: 16px;
+      background: #f8f9fa;
+      border-radius: 8px;
+    }
+
+    &-stat-label {
+      display: block;
+      font-size: 12px;
+      color: #666;
+      margin-bottom: 4px;
+    }
+
+    &-stat-value {
+      display: block;
+      font-size: 18px;
+      font-weight: 600;
+      color: #232956;
+
+      &--remaining {
+        color: #28a745;
+      }
+    }
+  }
+}
