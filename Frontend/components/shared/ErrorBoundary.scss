@@ -1,0 +1,96 @@
+/ Frontend/components/shared/ErrorBoundary.scss
+.error-boundary {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background-color: #f8f9fa;
+
+  &__container {
+    max-width: 500px;
+    width: 100%;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    padding: 40px;
+    text-align: center;
+  }
+
+  &__icon {
+    margin-bottom: 24px;
+    animation: pulse 2s ease-in-out infinite;
+  }
+
+  &__title {
+    font-size: 24px;
+    font-weight: 600;
+    color: #232956;
+    margin-bottom: 16px;
+  }
+
+  &__message {
+    font-size: 16px;
+    color: #666;
+    margin-bottom: 32px;
+    line-height: 1.6;
+  }
+
+  &__details {
+    margin: 24px 0;
+    text-align: left;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    padding: 16px;
+
+    summary {
+      cursor: pointer;
+      color: #666;
+      font-size: 14px;
+      margin-bottom: 12px;
+      
+      &:hover {
+        color: #232956;
+      }
+    }
+  }
+
+  &__stack {
+    font-family: 'Courier New', monospace;
+    font-size: 12px;
+    color: #df2528;
+    white-space: pre-wrap;
+    word-break: break-all;
+    overflow-x: auto;
+    margin: 0;
+  }
+
+  &__actions {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    flex-wrap: wrap;
+
+    .btn {
+      min-width: 120px;
+    }
+  }
+
+  &__hint {
+    margin-top: 24px;
+    font-size: 14px;
+    color: #999;
+  }
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
