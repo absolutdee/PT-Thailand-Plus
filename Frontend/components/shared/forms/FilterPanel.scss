@@ -1,0 +1,132 @@
+
+// Frontend/components/shared/forms/FilterPanel.scss
+.filter-panel {
+  background: white;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  overflow: hidden;
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 20px;
+    border-bottom: 1px solid #f0f0f0;
+  }
+
+  &__title {
+    font-size: 16px;
+    font-weight: 600;
+    color: #232956;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  &__count {
+    background: #232956;
+    color: white;
+    font-size: 12px;
+    font-weight: 500;
+    padding: 2px 8px;
+    border-radius: 12px;
+    min-width: 20px;
+    text-align: center;
+  }
+
+  &__toggle {
+    background: none;
+    border: none;
+    color: #666;
+    cursor: pointer;
+    padding: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: color 0.2s;
+
+    &:hover {
+      color: #232956;
+    }
+  }
+
+  &__content {
+    padding: 20px;
+  }
+
+  &__filters {
+    display: grid;
+    gap: 16px;
+    margin-bottom: 20px;
+  }
+
+  &__label {
+    display: block;
+    font-size: 14px;
+    font-weight: 500;
+    color: #333;
+    margin-bottom: 8px;
+  }
+
+  &__range {
+    &-inputs {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    &-separator {
+      color: #666;
+    }
+  }
+
+  &__checkbox-group,
+  &__radio-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  &__checkbox,
+  &__radio {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    color: #333;
+
+    input {
+      cursor: pointer;
+    }
+
+    &:hover {
+      color: #232956;
+    }
+  }
+
+  &__actions {
+    display: flex;
+    gap: 12px;
+    justify-content: flex-end;
+    padding-top: 16px;
+    border-top: 1px solid #f0f0f0;
+  }
+}
+
+@media (max-width: 768px) {
+  .filter-panel {
+    &__content {
+      padding: 16px;
+    }
+
+    &__actions {
+      flex-direction: column;
+      
+      .btn {
+        width: 100%;
+      }
+    }
+  }
+}
