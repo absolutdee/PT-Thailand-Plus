@@ -1,0 +1,162 @@
+
+// Frontend/components/shared/forms/FormImageUpload.scss
+.form-image-upload {
+  margin-bottom: 20px;
+
+  &__label {
+    display: block;
+    font-size: 14px;
+    font-weight: 500;
+    color: #333;
+    margin-bottom: 8px;
+  }
+
+  &__required {
+    color: #df2528;
+    margin-left: 4px;
+  }
+
+  &__dropzone {
+    border: 2px dashed #e0e0e0;
+    border-radius: 8px;
+    padding: 40px 20px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.2s;
+    background: #fafafa;
+
+    &:hover:not(&--disabled) {
+      border-color: #232956;
+      background: #f8f9fa;
+    }
+
+    &--dragging {
+      border-color: #232956;
+      background: #f0f7ff;
+    }
+
+    &--disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+  }
+
+  &__dropzone-content {
+    svg {
+      color: #999;
+      margin-bottom: 16px;
+    }
+  }
+
+  &__dropzone-text {
+    font-size: 16px;
+    color: #333;
+    margin: 0 0 8px;
+  }
+
+  &__dropzone-hint {
+    font-size: 14px;
+    color: #666;
+    margin: 0;
+  }
+
+  &__preview-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 16px;
+    margin-top: 16px;
+  }
+
+  &__preview-item {
+    position: relative;
+    background: white;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  &__preview-image {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1;
+    background: #f5f5f5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
+  &__progress {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: rgba(0, 0, 0, 0.1);
+  }
+
+  &__progress-bar {
+    height: 100%;
+    background: #232956;
+    transition: width 0.3s;
+  }
+
+  &__preview-info {
+    padding: 12px;
+  }
+
+  &__preview-name {
+    font-size: 14px;
+    color: #333;
+    margin: 0 0 4px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  &__preview-size {
+    font-size: 12px;
+    color: #666;
+    margin: 0;
+  }
+
+  &__preview-remove {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    width: 28px;
+    height: 28px;
+    background: rgba(255, 255, 255, 0.9);
+    border: 1px solid #e0e0e0;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s;
+    color: #666;
+
+    &:hover {
+      background: white;
+      color: #df2528;
+      border-color: #df2528;
+    }
+  }
+
+  &__hint {
+    font-size: 12px;
+    color: #666;
+    margin-top: 6px;
+  }
+
+  &__error {
+    font-size: 12px;
+    color: #df2528;
+    margin-top: 6px;
+  }
+}
