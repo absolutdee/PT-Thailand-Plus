@@ -1,0 +1,314 @@
+// Frontend/components/shared/charts/RevenueChart.scss
+.revenue-chart {
+  background: white;
+  border-radius: 12px;
+  padding: 24px;
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 24px;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  &__stats {
+    display: flex;
+    gap: 32px;
+  }
+
+  &__stat {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  &__stat-label {
+    font-size: 14px;
+    color: #666;
+  }
+
+  &__stat-value {
+    font-size: 24px;
+    font-weight: 700;
+    color: #232956;
+  }
+
+  &__controls {
+    display: flex;
+    gap: 8px;
+  }
+
+  &__control {
+    width: 36px;
+    height: 36px;
+    border: 1px solid #e0e0e0;
+    background: white;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s;
+    color: #666;
+
+    &:hover {
+      border-color: #232956;
+      color: #232956;
+    }
+
+    &.active {
+      background: #232956;
+      border-color: #232956;
+      color: white;
+    }
+  }
+
+  &__tooltip {
+    background: white;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  &__tooltip-label {
+    font-weight: 600;
+    color: #333;
+    margin: 0 0 8px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #f0f0f0;
+  }
+
+  &__tooltip-item {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 4px 0;
+    font-size: 14px;
+    color: #666;
+  }
+
+  &__tooltip-value {
+    font-weight: 600;
+    color: #333;
+  }
+}
+
+@media (max-width: 768px) {
+  .revenue-chart {
+    &__header {
+      flex-direction: column;
+    }
+
+    &__stats {
+      width: 100%;
+      justify-content: space-around;
+    }
+
+    &__controls {
+      width: 100%;
+      justify-content: center;
+    }
+  }
+}
+
+// Frontend/components/shared/charts/WorkoutStats.jsx
+import React from 'react';
+import {
+  RadarChart,
+  PolarGrid,
+  PolarAngleAxis,
+  PolarRadiusAxis,
+  Radar,
+  ResponsiveContainer,
+  PieChart,
+  Pie,
+  Cell,
+  Tooltip,
+  Legend
+} from 'recharts';
+import './WorkoutStats.scss';
+
+const WorkoutStats = ({
+  data = [],
+  type = 'radar', // 'radar' | 'pie' | 'summary'
+  height = 300,
+  showLegend = true
+}) => {
+  const COLORS = ['#232956', '#df2528', '#28a745', '#17a2b8', '#ffc107', '#6c757d'];
+
+  const workoutTypeLabels = {
+    weight_training: 'เวทเทรนนิ่ง',
+    cardio: 'คาร์ดิโอ',
+    yoga: 'โยคะ',
+    pilates: 'พิลาทิส',
+    crossfit: 'ครอสฟิต',
+    swimming: 'ว่ายน้ำ'
+  };
+
+  const CustomTooltip = ({ active, payload }) => {
+    if (!active || !payload || !payload[0]) return null;
+
+    return (
+      <div className="workout-stats__tooltip">
+        <p className="workout-stats__tooltip-label">
+          {payload[0].payload.activity || payload[0].name}
+        </p>
+        <p className="workout-stats__tooltip-value">
+          {payload[0].value} {type === 'radar' ? 'คะแนน' : 'ครั้ง'}
+        </p>
+      </div>
+    );
+  };
+
+  const renderRadarChart = () => (
+    <ResponsiveContainer width="100%" height={height}>
+      <RadarChart data={data}>
+        <PolarGrid stroke="#e0e0e0" />
+        <PolarAngleAxis 
+          dataKey="activity" 
+          tick={{ fill: '#666', fontSize: 12 }}
+        />
+        <PolarRadiusAxis 
+          angle={90} 
+          domain={[0, 100]}
+          tick={{ fill: '#666', fontSize: 10 }}
+        />
+        <Radar 
+          name="ประสิทธิภาพ" 
+          dataKey="score" 
+          stroke="#232956" 
+          fill="#232956" 
+          fillOpacity={0.6}
+          strokeWidth={2}
+        />
+        <Tooltip content={<CustomTooltip />} />
+      </RadarChart>
+    </ResponsiveContainer>
+  );
+
+  const renderPieChart = () => {
+    const pieData = data.map(item => ({
+      name: workoutTypeLabels[item.type] || item.type,
+      value: item.count || item.value
+    }));
+
+    return (
+      <ResponsiveContainer width="100%" height={height}>
+        <PieChart>
+          <Pie
+            data={pieData}
+            cx="50%"
+            cy="50%"
+            labelLine={false}
+            label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`}
+            outerRadius={80}
+            fill="#8884d8"
+            dataKey="value"
+          >
+            {pieData.map((entry, index) => (
+              <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+            ))}
+          </Pie>
+          <Tooltip content={<CustomTooltip />} />
+          {showLegend && <Legend />}
+        </PieChart>
+      </ResponsiveContainer>
+    );
+  };
+
+  const renderSummaryStats = () => {
+    const totalWorkouts = data.reduce((sum, item) => sum + (item.count || 0), 0);
+    const totalDuration = data.reduce((sum, item) => sum + (item.duration || 0), 0);
+    const avgDuration = totalWorkouts > 0 ? Math.round(totalDuration / totalWorkouts) : 0;
+    const favoriteType = data.reduce((a, b) => (a.count || 0) > (b.count || 0) ? a : b, {});
+
+    return (
+      <div className="workout-stats__summary">
+        <div className="workout-stats__summary-grid">
+          <div className="workout-stats__summary-item">
+            <div className="workout-stats__summary-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+              </svg>
+            </div>
+            <div className="workout-stats__summary-content">
+              <span className="workout-stats__summary-value">{totalWorkouts}</span>
+              <span className="workout-stats__summary-label">ครั้งทั้งหมด</span>
+            </div>
+          </div>
+
+          <div className="workout-stats__summary-item">
+            <div className="workout-stats__summary-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M15 1H9v2h6V1zm-4 13h2V8h-2v6zm8.03-6.61l1.42-1.42c-.43-.51-.9-.99-1.41-1.41l-1.42 1.42A8.962 8.962 0 0012 4c-4.97 0-9 4.03-9 9s4.02 9 9 9 9-4.03 9-9c0-2.12-.74-4.07-1.97-5.61zM12 20c-3.87 0-7-3.13-7-7s3.13-7 7-7 7 3.13 7 7-3.13 7-7 7z"/>
+              </svg>
+            </div>
+            <div className="workout-stats__summary-content">
+              <span className="workout-stats__summary-value">{totalDuration}</span>
+              <span className="workout-stats__summary-label">นาทีทั้งหมด</span>
+            </div>
+          </div>
+
+          <div className="workout-stats__summary-item">
+            <div className="workout-stats__summary-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM7 10h5v5H7z"/>
+              </svg>
+            </div>
+            <div className="workout-stats__summary-content">
+              <span className="workout-stats__summary-value">{avgDuration}</span>
+              <span className="workout-stats__summary-label">นาที/ครั้ง</span>
+            </div>
+          </div>
+
+          <div className="workout-stats__summary-item">
+            <div className="workout-stats__summary-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
+              </svg>
+            </div>
+            <div className="workout-stats__summary-content">
+              <span className="workout-stats__summary-value">
+                {workoutTypeLabels[favoriteType.type] || '-'}
+              </span>
+              <span className="workout-stats__summary-label">ประเภทโปรด</span>
+            </div>
+          </div>
+        </div>
+
+        <div className="workout-stats__summary-chart">
+          {data.map((item, index) => (
+            <div key={index} className="workout-stats__summary-bar">
+              <span className="workout-stats__summary-bar-label">
+                {workoutTypeLabels[item.type] || item.type}
+              </span>
+              <div className="workout-stats__summary-bar-track">
+                <div 
+                  className="workout-stats__summary-bar-fill"
+                  style={{ 
+                    width: `${(item.count / totalWorkouts) * 100}%`,
+                    backgroundColor: COLORS[index % COLORS.length]
+                  }}
+                />
+              </div>
+              <span className="workout-stats__summary-bar-value">{item.count}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    );
+  };
+
+  return (
+    <div className="workout-stats">
+      {type === 'radar' && renderRadarChart()}
+      {type === 'pie' && renderPieChart()}
+      {type === 'summary' && renderSummaryStats()}
+    </div>
+  );
+};
+
+export default WorkoutStats;
