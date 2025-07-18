@@ -1,0 +1,245 @@
+
+// Frontend/components/shared/booking/SessionCard.scss
+.session-card {
+  background: white;
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  overflow: hidden;
+  transition: all 0.2s;
+
+  &:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  }
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 20px;
+    background: #f8f9fa;
+    border-bottom: 1px solid #e0e0e0;
+  }
+
+  &__date-time {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  &__date {
+    font-size: 14px;
+    font-weight: 600;
+    color: #333;
+  }
+
+  &__time {
+    font-size: 12px;
+    color: #666;
+  }
+
+  &__body {
+    padding: 20px;
+  }
+
+  &__user {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+
+  &__user-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+
+  &__user-name {
+    font-size: 16px;
+    font-weight: 500;
+    color: #232956;
+    margin: 0 0 2px;
+  }
+
+  &__user-role {
+    font-size: 12px;
+    color: #666;
+    margin: 0;
+  }
+
+  &__workout {
+    margin-bottom: 16px;
+  }
+
+  &__workout-type {
+    font-size: 18px;
+    font-weight: 600;
+    color: #232956;
+    margin: 0 0 4px;
+  }
+
+  &__package {
+    font-size: 14px;
+    color: #666;
+    margin: 0;
+  }
+
+  &__metrics {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 16px;
+    flex-wrap: wrap;
+  }
+
+  &__metric {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 14px;
+    color: #666;
+
+    svg {
+      color: #232956;
+    }
+  }
+
+  &__exercises {
+    margin-bottom: 16px;
+
+    &-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: #333;
+      margin: 0 0 8px;
+    }
+
+    &-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+
+      li {
+        font-size: 14px;
+        color: #666;
+        padding: 4px 0;
+        padding-left: 16px;
+        position: relative;
+
+        &::before {
+          content: '•';
+          position: absolute;
+          left: 0;
+          color: #232956;
+        }
+      }
+    }
+  }
+
+  &__more {
+    font-style: italic;
+    color: #999;
+  }
+
+  &__notes {
+    &-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: #333;
+      margin: 0 0 8px;
+    }
+
+    &-text {
+      font-size: 14px;
+      color: #666;
+      line-height: 1.5;
+      margin: 0;
+    }
+  }
+
+  &__footer {
+    padding: 16px 20px;
+    background: #f8f9fa;
+    border-top: 1px solid #e0e0e0;
+    display: flex;
+    gap: 8px;
+  }
+
+  // Compact variant
+  &--compact {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 16px;
+    cursor: pointer;
+
+    .session-card__date-compact {
+      width: 50px;
+      height: 50px;
+      background: #f0f7ff;
+      border-radius: 8px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .session-card__day {
+      font-size: 20px;
+      font-weight: 700;
+      color: #232956;
+      line-height: 1;
+    }
+
+    .session-card__month {
+      font-size: 12px;
+      color: #666;
+      text-transform: uppercase;
+    }
+
+    .session-card__info {
+      flex: 1;
+    }
+
+    .session-card__title {
+      font-size: 16px;
+      font-weight: 500;
+      color: #333;
+      margin: 0 0 4px;
+    }
+
+    .session-card__trainer {
+      font-size: 14px;
+      color: #666;
+      margin: 0;
+    }
+
+    .session-card__metrics {
+      margin: 0;
+      gap: 12px;
+    }
+
+    .session-card__metric {
+      font-size: 12px;
+    }
+  }
+}
+
+@media (max-width: 576px) {
+  .session-card {
+    &__metrics {
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    &__footer {
+      flex-wrap: wrap;
+
+      .btn {
+        flex: 1;
+        min-width: 0;
+      }
+    }
+  }
+}
