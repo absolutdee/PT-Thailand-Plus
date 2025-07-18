@@ -1,0 +1,198 @@
+/ Frontend/components/shared/PackageCard.scss
+.package-card {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  padding: 24px;
+  position: relative;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  }
+
+  &--selected {
+    border: 2px solid #232956;
+    
+    &::before {
+      content: '';
+      position: absolute;
+      top: -2px;
+      left: -2px;
+      right: -2px;
+      bottom: -2px;
+      background: linear-gradient(135deg, #232956 0%, #df2528 100%);
+      border-radius: 12px;
+      z-index: -1;
+    }
+  }
+
+  &--recommended {
+    border: 2px solid #ffc107;
+  }
+
+  &__badge {
+    position: absolute;
+    top: -12px;
+    right: 20px;
+    background: #ffc107;
+    color: white;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+
+    svg {
+      fill: white;
+    }
+  }
+
+  &__actions {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    display: flex;
+    gap: 8px;
+    opacity: 0;
+    transition: opacity 0.2s;
+  }
+
+  &:hover &__actions {
+    opacity: 1;
+  }
+
+  &__action {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: #f8f9fa;
+    border: 1px solid #e0e0e0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s;
+    color: #666;
+
+    &:hover {
+      background: #232956;
+      border-color: #232956;
+      color: white;
+    }
+
+    &--danger:hover {
+      background: #dc3545;
+      border-color: #dc3545;
+    }
+  }
+
+  &__header {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  &__icon {
+    font-size: 48px;
+    display: block;
+    margin-bottom: 12px;
+  }
+
+  &__name {
+    font-size: 20px;
+    font-weight: 600;
+    color: #232956;
+    margin: 0 0 8px;
+  }
+
+  &__type {
+    font-size: 14px;
+    color: #666;
+    background: #f8f9fa;
+    padding: 4px 12px;
+    border-radius: 20px;
+    display: inline-block;
+  }
+
+  &__content {
+    flex: 1;
+    margin-bottom: 20px;
+  }
+
+  &__description {
+    font-size: 14px;
+    color: #666;
+    line-height: 1.6;
+    margin-bottom: 16px;
+  }
+
+  &__features {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  &__feature {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    color: #333;
+
+    svg {
+      flex-shrink: 0;
+    }
+  }
+
+  &__footer {
+    border-top: 1px solid #f0f0f0;
+    padding-top: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &__price {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__price-amount {
+    font-size: 28px;
+    font-weight: 700;
+    color: #232956;
+  }
+
+  &__price-unit {
+    font-size: 14px;
+    color: #666;
+  }
+
+  &__trainer {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+    color: #333;
+    font-size: 14px;
+    transition: color 0.2s;
+
+    img {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+
+    &:hover {
+      color: #232956;
+    }
+  }
+}
