@@ -1,0 +1,284 @@
+
+// Frontend/components/shared/forms/FormSelect.scss
+.form-select {
+  position: relative;
+  margin-bottom: 20px;
+
+  &__label {
+    display: block;
+    font-size: 14px;
+    font-weight: 500;
+    color: #333;
+    margin-bottom: 8px;
+  }
+
+  &__required {
+    color: #df2528;
+    margin-left: 4px;
+  }
+
+  &__control {
+    position: relative;
+    display: flex;
+    align-items: center;
+    background: white;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s;
+
+    &:focus {
+      outline: none;
+      border-color: #232956;
+      box-shadow: 0 0 0 3px rgba(35, 41, 86, 0.1);
+    }
+  }
+
+  &__icon {
+    position: absolute;
+    left: 16px;
+    color: #666;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+  }
+
+  &__value {
+    flex: 1;
+    padding: 0 40px 0 16px;
+    font-size: 16px;
+    color: #333;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  &__indicators {
+    position: absolute;
+    right: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  &__clear {
+    background: none;
+    border: none;
+    color: #666;
+    cursor: pointer;
+    padding: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: color 0.2s;
+
+    &:hover {
+      color: #232956;
+    }
+  }
+
+  &__arrow {
+    color: #666;
+    transition: transform 0.2s;
+  }
+
+  &__dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    margin-top: 4px;
+    background: white;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    max-height: 300px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__search {
+    position: relative;
+    padding: 12px;
+    border-bottom: 1px solid #f0f0f0;
+
+    svg {
+      position: absolute;
+      right: 24px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #666;
+      pointer-events: none;
+    }
+  }
+
+  &__search-input {
+    width: 100%;
+    padding: 8px 36px 8px 12px;
+    border: 1px solid #e0e0e0;
+    border-radius: 6px;
+    font-size: 14px;
+
+    &:focus {
+      outline: none;
+      border-color: #232956;
+    }
+  }
+
+  &__options {
+    flex: 1;
+    overflow-y: auto;
+    list-style: none;
+    margin: 0;
+    padding: 8px 0;
+  }
+
+  &__option {
+    display: flex;
+    align-items: center;
+    padding: 10px 16px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+
+    &:hover {
+      background-color: #f8f9fa;
+    }
+
+    &--selected {
+      background-color: #f0f7ff;
+      color: #232956;
+      font-weight: 500;
+    }
+
+    &--focused {
+      background-color: #f8f9fa;
+    }
+
+    &--disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+  }
+
+  &__checkbox {
+    margin-right: 12px;
+  }
+
+  &__no-options {
+    padding: 20px;
+    text-align: center;
+    color: #666;
+  }
+
+  &__hint {
+    font-size: 12px;
+    color: #666;
+    margin-top: 6px;
+  }
+
+  &__error {
+    font-size: 12px;
+    color: #df2528;
+    margin-top: 6px;
+  }
+
+  // Size variants
+  &--small {
+    .form-select__control {
+      height: 36px;
+      font-size: 14px;
+    }
+
+    .form-select__value {
+      padding: 0 36px 0 12px;
+      font-size: 14px;
+    }
+  }
+
+  &--medium {
+    .form-select__control {
+      height: 44px;
+    }
+  }
+
+  &--large {
+    .form-select__control {
+      height: 52px;
+      font-size: 18px;
+    }
+
+    .form-select__value {
+      padding: 0 44px 0 20px;
+      font-size: 18px;
+    }
+  }
+
+  // Style variants
+  &--filled {
+    .form-select__control {
+      background: #f8f9fa;
+      border-color: transparent;
+
+      &:focus {
+        background: white;
+        border-color: #232956;
+      }
+    }
+  }
+
+  &--borderless {
+    .form-select__control {
+      border: none;
+      border-bottom: 2px solid #e0e0e0;
+      border-radius: 0;
+
+      &:focus {
+        border-bottom-color: #232956;
+        box-shadow: none;
+      }
+    }
+
+    .form-select__dropdown {
+      border-radius: 8px;
+      margin-top: 8px;
+    }
+  }
+
+  // States
+  &--open {
+    .form-select__control {
+      border-color: #232956;
+      box-shadow: 0 0 0 3px rgba(35, 41, 86, 0.1);
+    }
+
+    .form-select__arrow {
+      transform: rotate(180deg);
+    }
+  }
+
+  &--error {
+    .form-select__control {
+      border-color: #df2528;
+
+      &:focus {
+        border-color: #df2528;
+        box-shadow: 0 0 0 3px rgba(223, 37, 40, 0.1);
+      }
+    }
+  }
+
+  &--disabled {
+    .form-select__control {
+      background: #f5f5f5;
+      cursor: not-allowed;
+      opacity: 0.6;
+    }
+
+    .form-select__value {
+      color: #999;
+    }
+  }
+}
